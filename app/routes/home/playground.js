@@ -12,6 +12,13 @@ import Calendar from 'react-native-calendar';
 import { GiftedChat } from 'react-native-gifted-chat';
 import AppIntro from 'react-native-app-intro';
 
+// Playground
+import ListWithIconComponent from '../../components/list_with_icon';
+import ListWithIconAndDetailsComponent from '../../components/list_with_icon_and_details';
+import ListItemDeletableComponent from '../../components/list_item_deletable';
+import ListItemImageComponent from '../../components/list_with_image';
+import ListTimelineComponent from '../../components/list_timeline';
+
 export default class HomeComponent extends Component {
     ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     constructor (props){
@@ -112,6 +119,28 @@ export default class HomeComponent extends Component {
         );
     }
     previewCalender(){
+        // For Calender
+        const customStyle = {
+            calendarContainer: {
+                backgroundColor: 'white',
+            },
+            controlButtonText: {
+                color: '#7f8c8d',
+                fontFamily: 'Avenir Next'
+            },
+            day: {
+                color: '#2c3e50',
+                fontFamily: 'Avenir Next'
+            },
+            eventIndicator: {
+                backgroundColor: '#e74c3c',
+                width: 10,
+                height: 10,
+            },
+            title: {
+                color: '#2c3e50',
+            }
+        };
         return (
             <View>
                 <View style={{backgroundColor:'white'}}>
@@ -149,32 +178,46 @@ export default class HomeComponent extends Component {
             </View>
         );
     }
+    previewWalkthrough(){
+        const pageArray = [{
+            title: 'Learn the basics',
+            description: 'Keisha Helps you present your work or ideas beautifulls',
+            //img: {uri: 'https://source.unsplash.com/random/100x100'},
+            imgStyle: {
+                height: 80 * 2.5,
+                width: 109 * 2.5,
+            },
+            backgroundColor: '#acdce8',
+            fontColor: '#2c3e50',
+            fontWeight:'700',
+            level: 10,
+        }, {
+            title: 'Organise',
+            description: 'Drag and Drop to Move',
+            //img: {uri: 'https://source.unsplash.com/random/100x100'},
+            imgStyle: {
+                height: 93 * 2.5,
+                width: 103 * 2.5,
+            },
+            backgroundColor: '#fec89a',
+            fontColor: '#2c3e50',
+            level: 10,
+        }];
+        return (
+            <AppIntro
+                onNextBtnClick={this.nextBtnHandle}
+                onDoneBtnClick={this.doneBtnHandle}
+                rightTextColor="#2c3e50"
+                onSkipBtnClick={this.onSkipBtnHandle}
+                onSlideChange={this.onSlideChangeHandle}
+                pageArray={pageArray}
+            />
+        );
+    }
     render(){
         const drawerStyles = {
             drawer: { shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3},
             main: {paddingLeft: 3}
-        };
-        // For Calender
-        const customStyle = {
-            calendarContainer: {
-                backgroundColor: 'white',
-            },
-            controlButtonText: {
-                color: '#7f8c8d',
-                fontFamily: 'Avenir Next'
-            },
-            day: {
-                color: '#2c3e50',
-                fontFamily: 'Avenir Next'
-            },
-            eventIndicator: {
-                backgroundColor: '#e74c3c',
-                width: 10,
-                height: 10,
-            },
-            title: {
-                color: '#2c3e50',
-            }
         };
         // For Chat
         const messages = [
@@ -199,42 +242,6 @@ export default class HomeComponent extends Component {
                 },
             }
         ];
-        const pageArray = [{
-            title: 'Learn the basics',
-            description: 'Keisha Helps you present your work or ideas beautifulls',
-            //img: {uri: 'https://source.unsplash.com/random/100x100'},
-            imgStyle: {
-                height: 80 * 2.5,
-                width: 109 * 2.5,
-            },
-            backgroundColor: '#acdce8',
-            fontColor: '#2c3e50',
-            fontWeight:'700',
-            level: 10,
-        }, {
-            title: 'Organise',
-            description: 'Drag and Drop to Move',
-            //img: {uri: 'https://source.unsplash.com/random/100x100'},
-            imgStyle: {
-                height: 93 * 2.5,
-                width: 103 * 2.5,
-            },
-            backgroundColor: '#fec89a',
-            fontColor: '#2c3e50',
-            level: 10,
-        },
-            {
-                title: 'Collect',
-                description: 'Tap empty cell to add images and text',
-                //img: {uri: 'https://source.unsplash.com/random/100x100'},
-                imgStyle: {
-                    height: 93 * 2.5,
-                    width: 103 * 2.5,
-                },
-                backgroundColor: '#ffec57',
-                fontColor: '#2c3e50',
-                level: 10,
-            }];
         return (
             <Drawer
                 ref={(ref) => this._drawer = ref}
@@ -246,13 +253,29 @@ export default class HomeComponent extends Component {
             >
                 <Container style={styles.container}>
                     <Content style={[styles.content]}>
-                        <AppIntro
-                            onNextBtnClick={this.nextBtnHandle}
-                            onDoneBtnClick={this.doneBtnHandle}
-                            rightTextColor="#2c3e50"
-                            onSkipBtnClick={this.onSkipBtnHandle}
-                            onSlideChange={this.onSlideChangeHandle}
-                            pageArray={pageArray}
+                        <ListWithIconComponent
+                            icon = "ios-chatbubbles-outline"
+                            title = "Analytics"
+                        />
+                        <ListWithIconAndDetailsComponent
+                            icon = "ios-chatbubbles-outline"
+                            title = "Analytics"
+                            description = "For the love of analytics"
+                        />
+                        <ListItemDeletableComponent
+                            icon = "ios-chatbubbles-outline"
+                            title = "Ade Phillips"
+                            description1 = "Tax"
+                            description2 = "$100"
+                            description3 = "School Stuff"
+                            description_side = "500$"
+                        />
+                        <ListItemImageComponent
+                            image = 'https:source.unsplash.com/random/100x100'
+                            title = "Analytics"
+                            description = "For the love of analytics"
+                            icon  = 'ios-chatbubbles-outline'
+                            iconColor = 'green'
                         />
                     </Content>
                 </Container>

@@ -10,7 +10,7 @@ import { Scene, Router, TabBar, Modal, Schema, Actions, Reducer, ActionConst } f
 
 import TripsComponent from './routes/trips/trips';
 import OffersComponent from './routes/offers/offers';
-import ProfileComponent from './routes/profile/profile';
+
 import ExploreComponent from './routes/explore/explore';
 
 import ForgotComponent from './routes/authentication/forgot';
@@ -31,37 +31,82 @@ import PlaygroundComponent from './routes/home/playground';
 import FormsComponent from './routes/newdesign/form';
 import OrdersComponent from './routes/newdesign/orders';
 import OrderDetailComponent from './routes/newdesign/order_detail';
-import WalkthroughComponent from './routes/newdesign/walkthrough';
 import AirportComponent from './routes/newdesign/airports';
 import ConfirmationComponent from './routes/newdesign/confirmation';
 import OptionalEmailComponent from './routes/newdesign/optionalemail';
-
-
-
+// New imports
+import ProfileComponent from './routes/demo/profile';
+import ParentComponent from './routes/demo/parents';
+import FeeComponent from './routes/demo/fees';
+import PendingFeeComponent from './routes/demo/pending_fees';
+import GroupsComponent from './routes/demo/groups';
+import GroupPeopleComponent from './routes/demo/group_people';
+import GroupMembersComponent from './routes/demo/group_members';
+import GroupEventsComponent from './routes/demo/group_events';
+import GroupMessageComponent from './routes/demo/group_messages';
+import ChatComponent from './routes/demo/chat';
+import MainHomeComponent from './routes/demo/home';
+import WalkthroughComponent from './routes/demo/walkthrough';
+import AccountsComponent from './routes/demo/accounts';
+import Drawer from 'react-native-drawer';
+import store from './store/store';
+import HeaderComponent from './components/header';
 class TabIcon extends Component {
     render(){
         return (
-            <Text style={{fontFamily: 'AvenirNext-Medium', color: this.props.selected ? 'red' :'black'}}>{this.props.title}</Text>
+            <Text style={{fontFamily: 'AvenirNext-Medium', color: this.props.selected ? 'red' :'grey'}}>{this.props.title}</Text>
         );
     }
 }
 export default class Keisha extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            parent : store.getState()
+        }
+    }
+    componentDidMount(){
+        this.subscribe();
+    }
+    subscribe(){
+
+    }
     render() {
+        const drawerStyles = {
+            drawer: { shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3},
+            main: {paddingLeft: 3}
+        };
         return (
-            <Router>
-                <Scene key="test" component={LoginComponent} hideNavBar={true} title="Form"/>
-                <Scene key="playground" component={PlaygroundComponent} hideNavBar={true} title="Form"/>
-                <Scene key="internetorderlist" component={OrdersComponent} hideNavBar={true} title="Form"/>
-                <Scene key="walkthrough" component={WalkthroughComponent} hideNavBar={true} title="Form"/>
-                <Scene key="choosehotel" component={HomeComponent} hideNavBar={true} title="Form"/>
-                <Scene key="openform" component={FormsComponent} hideNavBar={true} title="Form"/>
-                <Scene key="internetorderlist" component={OrdersComponent} hideNavBar={true} title="Form"/>
-                <Scene key="internetorderdetail" component={OrderDetailComponent} hideNavBar={true} title="Form"/>
-                <Scene key="chooseairports" component={AirportComponent} hideNavBar={true} title="Form"/>
-                <Scene key="confirmation" component={ConfirmationComponent} hideNavBar={true} title="Form"/>
-                <Scene key="addemail" component={OptionalEmailComponent} hideNavBar={true} title="Form"/>
-                <Scene key="calender" component={CalenderComponent} hideNavBar={true} title="Form"/>
-            </Router>
+            <Drawer
+                ref={(ref) => this._drawer = ref}
+                openDrawerOffset={100}
+                type="static"
+                styles={drawerStyles}
+                content={<HeaderComponent />}
+                tweenHandler={Drawer.tweenPresets.parallax}
+            >
+                <Router>
+                    <Scene key="main_walkthrough" component={WalkthroughComponent} hideNavBar={true} />
+                    <Scene key="main_home" component={MainHomeComponent} hideNavBar={true} />
+                    <Scene key="activate" component={RegisterComponent} hideNavBar={true} />
+                    <Scene key="accounts" component={AccountsComponent} hideNavBar={true} />
+                    <Scene key="login" component={LoginComponent} hideNavBar={true} />
+                    <Scene key="reset_password" component={ForgotComponent} hideNavBar={true} />
+                    <Scene key="chat" component={ChatComponent} hideNavBar={true} />
+                    <Scene key="group_details" tabs={true}>
+                        <Scene key="group_members" component={GroupPeopleComponent} hideNavBar={true} title="Members" icon={TabIcon} navigationBarStyle={{backgroundColor:'red'}} titleStyle={{color:'white'}}/>
+                        <Scene key="group_students" component={GroupMembersComponent} hideNavBar={true} title="Students" icon={TabIcon} navigationBarStyle={{backgroundColor:'red'}} titleStyle={{color:'white'}}/>
+                        <Scene key="group_events" component={GroupEventsComponent} hideNavBar={true} title="Events" icon={TabIcon} navigationBarStyle={{backgroundColor:'red'}} titleStyle={{color:'white'}}/>
+                        <Scene key="group_messages" component={GroupMessageComponent} hideNavBar={true} title="Messages" icon={TabIcon} navigationBarStyle={{backgroundColor:'red'}} titleStyle={{color:'white'}}/>
+                    </Scene>
+                    <Scene key="groups" component={GroupsComponent} hideNavBar={true} />
+                    <Scene key="pending_fees" component={PendingFeeComponent} hideNavBar={true} />
+                    <Scene key="fees" component={FeeComponent} hideNavBar={true} title="Form"/>
+                    <Scene key="parents" component={ParentComponent} hideNavBar={true} title="Form"/>
+                    <Scene key="profile" component={ProfileComponent} hideNavBar={true} title="Form"/>
+                    <Scene key="login" component={LoginComponent} hideNavBar={true} title="Form"/>
+                </Router>
+            </Drawer>
         )
     }
 }
