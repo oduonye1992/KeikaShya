@@ -42,8 +42,16 @@ export default class MainHomeComponent extends Component {
                 </Content>
                 <Footer style={{backgroundColor:'white'}}>
                     <View style={{flexDirection : 'row', width:250, justifyContent:'space-between'}}>
-                        <Text style={{fontFamily: 'Avenir Next', color : '#3498db', fontWeight:'bold'}}>Login </Text>
-                        <Text style={{fontFamily: 'Avenir Next', color : '#34495e', fontWeight:'bold'}}>Register </Text>
+                        <TouchableHighlight
+                            onPress={Actions.login}
+                        >
+                            <Text style={{fontFamily: 'Avenir Next', color : '#3498db', fontWeight:'bold'}}>Login </Text>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            onPress={Actions.activate}
+                        >
+                            <Text style={{fontFamily: 'Avenir Next', color : '#34495e', fontWeight:'bold'}}>Activate </Text>
+                        </TouchableHighlight>
                     </View>
                 </Footer>
             </Container>

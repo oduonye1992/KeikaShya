@@ -7,6 +7,8 @@ import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon } fr
 import HeaderComponent from '../../components/header';
 import {Actions} from 'react-native-router-flux';
 import ListItemDeletableComponent from '../../components/list_item_deletable';
+import store from '../../store/store';
+import SearchBar from 'react-native-search-bar';
 
 export default class ParentComponent extends Component {
     ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -14,12 +16,56 @@ export default class ParentComponent extends Component {
         super(props);
         this.state = {
             dataSource: this.ds.cloneWithRows(
-                [{
-                    title : 'Name',
-                    description1 : 'Daniel Oduonye',
-                    description2 : 'Daniel Oduonye',
-                    icon : 'ios-menu-outline'
-                }]
+                [
+                    {
+                        title : 'Mrs Rohit Junior',
+                        description1 : 'Rohir Jama;',
+                        description2 : '2012-12-17',
+                        icon : 'ios-person-outline'
+                    },{
+                    title : 'Mrs Rohit Junior',
+                    description1 : 'Rohir Jama;',
+                    description2 : '2012-12-17',
+                    icon : 'ios-person-outline'
+                },
+                    {
+                        title : 'Mrs Rohit Junior',
+                        description1 : 'Rohir Jama;',
+                        description2 : '2012-12-17',
+                        icon : 'ios-person-outline'
+                    },
+                    {
+                        title : 'Mrs Rohit Junior',
+                        description1 : 'Rohir Jama;',
+                        description2 : '2012-12-17',
+                        icon : 'ios-person-outline'
+                    },
+                    {
+                        title : 'Mrs Rohit Junior',
+                        description1 : 'Rohir Jama;',
+                        description2 : '2012-12-17',
+                        icon : 'ios-person-outline'
+                    },
+                    {
+                        title : 'Mrs Rohit Junior',
+                        description1 : 'Rohir Jama;',
+                        description2 : '2012-12-17',
+                        icon : 'ios-person-outline'
+                    },
+                    {
+                        title : 'Mrs Rohit Junior',
+                        description1 : 'Rohir Jama;',
+                        description2 : '2012-12-17',
+                        icon : 'ios-person-outline'
+                    },
+                    {
+                        title : 'Mrs Rohit Junior',
+                        description1 : 'Rohir Jama;',
+                        description2 : '2012-12-17',
+                        icon : 'ios-person-outline'
+                    },
+
+                ]
             )
         }
     }
@@ -30,16 +76,26 @@ export default class ParentComponent extends Component {
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
-                    <Button transparent>
-                        <Icon name='md-add' style={styles.headerButton}/>
+                    <Button
+                        onPress = {() => {
+                            store.dispatch({
+                                type : 'OPEN_DRAWER'
+                            })
+                        }}
+                        transparent>
+                        <Icon name='ios-menu-outline' style={styles.headerButton}/>
                     </Button>
-                    <Title style={[styles.headerButton, styles.fontAvenir]}>Profiles</Title>
+                    <Title style={[styles.headerButton, styles.fontAvenir]}>Parents</Title>
                     <Button transparent>
-                        <Icon name='md-menu' style={styles.headerButton}/>
+                        <Icon name='ios-funnel-outline' style={styles.headerButton}/>
                     </Button>
                 </Header>
                 <Content style={[styles.content]}>
                     <View>
+                        <SearchBar
+                            ref='searchBar'
+                            placeholder='Search'
+                        />
                         <View style={{padding:10}}>
                             <ListView
                                 dataSource={this.state.dataSource}

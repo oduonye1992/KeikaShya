@@ -20,7 +20,36 @@ export default class GroupEventsComponent extends Component {
                     description : 'Daniel Oduonye',
                     image : 'https://source.unsplash.com/random/100x100',
                     time : '9:00'
-                }]
+                },{
+                    title : 'Name',
+                    description : 'Daniel Oduonye',
+                    image : 'https://source.unsplash.com/random/100x100',
+                    time : '9:00'
+                },
+                    {
+                        title : 'Name',
+                        description : 'Daniel Oduonye',
+                        image : 'https://source.unsplash.com/random/100x100',
+                        time : '9:00'
+                    },
+                    {
+                        title : 'Name',
+                        description : 'Daniel Oduonye',
+                        image : 'https://source.unsplash.com/random/100x100',
+                        time : '9:00'
+                    },
+                    {
+                        title : 'Name',
+                        description : 'Daniel Oduonye',
+                        image : 'https://source.unsplash.com/random/100x100',
+                        time : '9:00'
+                    },
+                    {
+                        title : 'Name',
+                        description : 'Daniel Oduonye',
+                        image : 'https://source.unsplash.com/random/100x100',
+                        time : '9:00'
+                    },]
             )
         }
     }
@@ -52,13 +81,14 @@ export default class GroupEventsComponent extends Component {
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
-                    <Button transparent>
-                        <Icon name='md-add' style={styles.headerButton}/>
+                    <Button
+                        onPress = {() => {
+                            Actions.pop()
+                        }}
+                        transparent>
+                        <Icon name='ios-arrow-round-back-outline' style={styles.headerButton}/>
                     </Button>
-                    <Title style={[styles.headerButton, styles.fontAvenir]}>People</Title>
-                    <Button transparent>
-                        <Icon name='md-menu' style={styles.headerButton}/>
-                    </Button>
+                    <Title style={[styles.headerButton, styles.fontAvenir]}>Events</Title>
                 </Header>
                 <Content style={[styles.content]}>
                     <View>

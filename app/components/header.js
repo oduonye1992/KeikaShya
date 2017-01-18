@@ -1,11 +1,68 @@
 import React, { Component } from 'react';
-import { View, Image, Text, StyleSheet, TouchableHighlight } from 'react-native'
+import { View, Image, Text, StyleSheet, TouchableHighlight , ListView} from 'react-native'
 import {Actions} from 'react-native-router-flux';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon } from 'native-base';
+import ListWithIconComponent from './list_with_icon';
+import store from '../store/store';
 export default class HeaderComponent extends Component{
-
+    ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     constructor (props) {
         super(props);
+        this.state = {
+            dataSource: this.ds.cloneWithRows(
+                [
+                    {
+                        title: 'Analytics',
+                        icon: 'ios-chatbubbles-outline'
+                    },
+                    {
+                        title: 'Parent',
+                        icon: 'ios-people-outline'
+                    },
+                    {
+                        title: 'Fees',
+                        icon: 'ios-cash-outline'
+                    },
+                    {
+                        title: 'Reciepts',
+                        icon: 'ios-card-outline'
+                    },
+                    {
+                        title: 'Groups',
+                        icon: 'ios-contacts-outline'
+                    },
+                    {
+                        title: 'Accounts',
+                        icon: 'ios-aperture-outline'
+                    },
+                    {
+                        title: 'Messages',
+                        icon: 'ios-chatbubbles-outline'
+                    },
+                ]
+            )
+        };
+    }
+    onClick(data){
+        if (data.title == 'Accounts'){
+            Actions.accounts();
+        } else if (data.title == 'Parent'){
+            Actions.parents();
+        } else if (data.title == 'Fees'){
+            Actions.fees();
+        } else if (data.title == 'Reciepts'){
+            Actions.pending_fees();
+        } else if (data.title == 'Accounts'){
+            Actions.accounts();
+        } else if (data.title == 'Messages'){
+            Actions.accounts();
+        } else if (data.title == 'Groups'){
+            Actions.groups();
+        }
+        store.dispatch({
+            type : 'CLOSE_DRAWER'
+        })
+
     }
     render(){
         return (
@@ -17,35 +74,19 @@ export default class HeaderComponent extends Component{
                         </View>
                     </View>
                     <View style={{padding:10}}>
-                        <View style={{flexDirection:'row', justifyContent:'flex-start', paddingBottom:20}}>
-                            <Icon name='ios-chatbubbles-outline' style={[styles.headerButton, {color:'#34495e'}]}/>
-                            <Text style={{padding:6, marginLeft : 10, fontWeight:'bold', fontFamily: 'Avenir Next', color : '#34495e'}}>Analytics</Text>
-                        </View>
-                        <View style={{flexDirection:'row', justifyContent:'flex-start',paddingBottom:20}}>
-                            <Icon name='ios-people-outline' style={[styles.headerButton, {color:'#e74c3c'}]}/>
-                            <Text style={{padding:6, marginLeft : 10,fontWeight:'bold', fontFamily: 'Avenir Next', color : '#e74c3c'}}>Parents</Text>
-                        </View>
-                        <View style={{flexDirection:'row', justifyContent:'flex-start',paddingBottom:20}}>
-                            <Icon name='ios-cash-outline' style={[styles.headerButton, {color:'#34495e'}]}/>
-                            <Text style={{padding:6, marginLeft : 10,fontWeight:'bold', fontFamily: 'Avenir Next', color : '#34495e'}}>Fees</Text>
-                        </View>
-                        <View style={{flexDirection:'row', justifyContent:'flex-start',paddingBottom:20}}>
-                            <Icon name='ios-card-outline' style={[styles.headerButton, {color:'#34495e'}]}/>
-                            <Text style={{padding:6, marginLeft : 10,fontWeight:'bold', fontFamily: 'Avenir Next', color : '#34495e'}}>Reciepts</Text>
-                        </View>
-                        <View style={{flexDirection:'row', justifyContent:'flex-start',paddingBottom:20}}>
-                            <Icon name='ios-cash-outline' style={[styles.headerButton, {color:'#34495e'}]}/>
-                            <Text style={{padding:6, marginLeft : 10,fontWeight:'bold', fontFamily: 'Avenir Next', color : '#34495e'}}>Pending Fee</Text>
-                        </View>
-                        <View style={{flexDirection:'row', justifyContent:'flex-start',paddingBottom:20}}>
-                            <Icon name='ios-aperture-outline' style={[styles.headerButton, {color:'#34495e'}]}/>
-                            <Text style={{padding:6, marginLeft : 10,fontWeight:'bold', fontFamily: 'Avenir Next', color : '#34495e'}}>Accounts</Text>
-                        </View>
-                        <View style={{flexDirection:'row', justifyContent:'flex-start',paddingBottom:20}}>
-                            <Icon name='ios-chatbubbles-outline' style={[styles.headerButton, {color:'#34495e'}]}/>
-                            <Text style={{padding:6, marginLeft : 10,fontWeight:'bold', fontFamily: 'Avenir Next', color : '#34495e'}}>Messages</Text>
-                        </View>
-
+                        <ListView
+                            dataSource={this.state.dataSource}
+                            renderRow={
+                                (rowData) => {
+                                    return <ListWithIconComponent
+                                        onClick = {this.onClick.bind(this)}
+                                        title = {rowData.title}
+                                        icon = {rowData.icon}
+                                        data = {rowData}
+                                    />
+                                }
+                            }
+                        />
                     </View>
                 </Content>
                 <Footer >

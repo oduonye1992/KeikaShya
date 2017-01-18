@@ -5,8 +5,10 @@ import { Text, StyleSheet, ListView, View,
 } from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon } from 'native-base';
 import HeaderComponent from '../../components/header';
-import {GiftedChat, Actions, Bubble} from 'react-native-gifted-chat';
+import {GiftedChat, Bubble} from 'react-native-gifted-chat';
 import ListWithImageComponent from '../../components/list_with_image';
+import store from '../../store/store';
+import {Actions} from 'react-native-router-flux';
 
 export default class ChatComponent extends Component {
     ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -188,13 +190,14 @@ export default class ChatComponent extends Component {
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
-                    <Button transparent>
+                    <Button
+                        onPress = {() => {
+                            Actions.pop()
+                        }}
+                        transparent>
                         <Icon name='ios-arrow-round-back-outline' style={styles.headerButton}/>
                     </Button>
-                    <Title style={[styles.headerButton, styles.fontAvenir]}>Ade Williams</Title>
-                    <Button transparent>
-                        <Icon name='ios-menu-outline' style={styles.headerButton}/>
-                    </Button>
+                    <Title style={[styles.headerButton, styles.fontAvenir]}></Title>
                 </Header>
                 <Content style={[styles.content]}>
                     <View>

@@ -7,6 +7,7 @@ import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon } fr
 import HeaderComponent from '../../components/header';
 import {Actions} from 'react-native-router-flux';
 import ListWithIconAndDetailsComponent from '../../components/list_with_icon_and_details';
+import store from '../../store/store';
 
 export default class HomeComponent extends Component {
     ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -15,10 +16,47 @@ export default class HomeComponent extends Component {
         this.state = {
             dataSource: this.ds.cloneWithRows(
                 [{
-                    title : 'Name',
+                    title : 'Full Name',
+                    description : 'Hushir A Rahman',
+                    icon : 'ios-person-outline'
+                },
+                    {
+                        title : 'Registration Number',
+                        description : '001',
+                        icon : 'ios-list-box-outline'
+                    },
+                    {
+                        title : 'Primary parent',
+                        description : 'Mrs Sirigu Ohuam',
+                        icon : 'ios-people-outline'
+                    },
+                    {
+                        title : 'Date of Birth',
+                        description : '10 Aug 2017',
+                        icon : 'ios-calendar-outline'
+                    },{
+                    title : 'Full Name',
                     description : 'Daniel Oduonye',
-                    icon : 'ios-menu-outline'
-                }]
+                    icon : 'ios-person-outline'
+                },
+                    {
+                        title : 'Registration Number',
+                        description : '001',
+                        icon : 'ios-list-box-outline'
+                    },
+                    {
+                        title : 'Primary parent',
+                        description : 'Mrs Sirigu Ohuam',
+                        icon : 'ios-people-outline'
+                    },
+                    {
+                        title : 'Date of Birth',
+                        description : '10 Aug 2017',
+                        icon : 'ios-calendar-outline'
+                    },
+
+
+                ]
             )
         }
     }
@@ -29,13 +67,14 @@ export default class HomeComponent extends Component {
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
-                    <Button transparent>
-                        <Icon name='md-add' style={styles.headerButton}/>
+                    <Button
+                        onPress = {() => {
+                            Actions.pop()
+                        }}
+                        transparent>
+                        <Icon name='ios-arrow-round-back-outline' style={styles.headerButton}/>
                     </Button>
-                    <Title style={[styles.headerButton, styles.fontAvenir]}>Profiles</Title>
-                    <Button transparent>
-                        <Icon name='md-menu' style={styles.headerButton}/>
-                    </Button>
+                    <Title style={[styles.headerButton, styles.fontAvenir]}>Profile</Title>
                 </Header>
                 <Content style={[styles.content]}>
                     <View>

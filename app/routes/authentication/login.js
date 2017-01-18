@@ -8,16 +8,18 @@ export default class LoginComponent extends Component{
         super(props);
     }
     openPinPage(){
-        Actions.private_pin();
+        Actions.accounts();
     }
     render (){
         return(
                 <Container style={styles.container}>
                     <Header style={{backgroundColor:'#2980b9'}}>
-                        <Button transparent>
+                        <Button
+                            onPress={Actions.pop}
+                            transparent>
                             <Icon name='ios-arrow-round-back-outline' style={{color:'white'}}/>
                         </Button>
-                        <Title style={[styles.headerButton, styles.fontAvenir, {color:'white'}]}>People</Title>
+                        <Title style={[styles.headerButton, styles.fontAvenir, {color:'white'}]}></Title>
                     </Header>
                     <Content style={{backgroundColor:'#2980b9', padding:10}}>
                         <LinearGradient colors={['#2980b9', '#2980b9']} style={styles.container}>
@@ -25,12 +27,11 @@ export default class LoginComponent extends Component{
                                 Login To Keisha App
                             </Text>
                             <TextInput
-                                autoFocus = {true}
                                 placeholder = "Mobile"
                                 style={{height: 70, fontSize : 30,  borderColor: 'white', color : 'white'}}
                             />
                             <TextInput
-                                autoFocus = {true}
+                                secureTextEntry = {true}
                                 placeholder = "Password"
                                 style={{height: 70, fontSize : 30,  borderColor: 'white', color : 'white'}}
                             />

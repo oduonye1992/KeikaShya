@@ -14,15 +14,17 @@ export default class LoginComponent extends Component{
         return(
                 <Container style={styles.container}>
                     <Header style={{backgroundColor:'#2c3e50'}}>
-                        <Button transparent>
+                        <Button
+                            onPress={Actions.pop}
+                            transparent>
                             <Icon name='ios-arrow-round-back-outline' style={{color:'white'}}/>
                         </Button>
-                        <Title style={[styles.headerButton, styles.fontAvenir, {color:'white'}]}>People</Title>
+                        <Title style={[styles.headerButton, styles.fontAvenir, {color:'white'}]}></Title>
                     </Header>
                     <Content style={{backgroundColor:'#2c3e50', padding:10}}>
                         <LinearGradient colors={['#2c3e50', '#2c3e50']} style={styles.container}>
-                            <Text style={styles.buttonText}>
-                                Join Travel Surfer
+                            <Text style={[styles.buttonText, {marginBottom:30, marginTop:60}]}>
+                                Register
                             </Text>
                             <TextInput
                                 autoFocus = {true}
@@ -55,32 +57,6 @@ export default class LoginComponent extends Component{
                                     Register
                                 </Text>
                             </TouchableHighlight>
-                            <View style={{width : 350,  marginTop : 150,  flexDirection : 'row', justifyContent : 'space-between', height : 60, alignItems : 'center', padding : 15}}>
-                                <Text  style={{
-                        fontFamily: 'AvenirNext-Regular',
-                        textAlign : 'center',
-                        fontSize : 15,
-                        backgroundColor : 'transparent',
-                        color : 'white'
-                    }}>
-                                    Already a user?
-                                </Text>
-                                <TouchableHighlight
-                                    style={styles.btnFooter}
-                                    underlayColor = "#ecf0f1"
-                                    onPress={Actions.private_previous_realm}
-                                >
-                                    <Text  style={{
-                            fontFamily: 'AvenirNext-Medium',
-                            textAlign : 'center',
-                            fontSize : 20,
-                            color : 'white',
-                            marginTop : -14
-                        }}>
-                                        Login
-                                    </Text>
-                                </TouchableHighlight>
-                            </View>
                         </LinearGradient>
                     </Content>
                 </Container>

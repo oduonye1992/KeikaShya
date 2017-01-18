@@ -15,12 +15,63 @@ export default class GroupMessageComponent extends Component {
         this.state = {
             dataSource: this.ds.cloneWithRows(
                 [{
-                    title : 'Name',
-                    description : 'Daniel Oduonye',
+                    title : 'Rohit Junoir',
+                    description : 'Hello pal, how is it going?',
                     image : 'https://source.unsplash.com/random/100x100',
-                    icon : 'ios-chatbubbles-outline',
+                    icon : 'ios-game-controller-b-outline',
                     iconColor : '#1abc9c'
-                }]
+                },
+                    {
+                        title : 'Rohit Junoir',
+                        description : 'Hello pal, how is it going?',
+                        image : 'https://source.unsplash.com/random/100x100',
+                        icon : 'ios-game-controller-b-outline',
+                        iconColor : '#1abc9c'
+                    },
+                    {
+                        title : 'Rohit Junoir',
+                        description : 'Hello pal, how is it going?',
+                        image : 'https://source.unsplash.com/random/100x100',
+                        icon : 'ios-game-controller-b-outline',
+                        iconColor : '#1abc9c'
+                    },
+                    {
+                        title : 'Rohit Junoir',
+                        description : 'Hello pal, how is it going?',
+                        image : 'https://source.unsplash.com/random/100x100',
+                        icon : 'ios-game-controller-b-outline',
+                        iconColor : '#1abc9c'
+                    },
+                    {
+                        title : 'Rohit Junoir',
+                        description : 'Hello pal, how is it going?',
+                        image : 'https://source.unsplash.com/random/100x100',
+                        icon : 'ios-game-controller-b-outline',
+                        iconColor : '#1abc9c'
+                    },
+                    {
+                        title : 'Rohit Junoir',
+                        description : 'Hello pal, how is it going?',
+                        image : 'https://source.unsplash.com/random/100x100',
+                        icon : 'ios-game-controller-b-outline',
+                        iconColor : '#1abc9c'
+                    },
+                    {
+                        title : 'Rohit Junoir',
+                        description : 'Hello pal, how is it going?',
+                        image : 'https://source.unsplash.com/random/100x100',
+                        icon : 'ios-game-controller-b-outline',
+                        iconColor : '#1abc9c'
+                    },
+                    {
+                        title : 'Rohit Junoir',
+                        description : 'Hello pal, how is it going?',
+                        image : 'https://source.unsplash.com/random/100x100',
+                        icon : 'ios-game-controller-b-outline',
+                        iconColor : '#1abc9c'
+                    }
+
+                ]
             )
         }
     }
@@ -31,13 +82,14 @@ export default class GroupMessageComponent extends Component {
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
-                    <Button transparent>
-                        <Icon name='md-add' style={styles.headerButton}/>
+                    <Button
+                        onPress = {() => {
+                            Actions.pop()
+                        }}
+                        transparent>
+                        <Icon name='ios-arrow-round-back-outline' style={styles.headerButton}/>
                     </Button>
-                    <Title style={[styles.headerButton, styles.fontAvenir]}>People</Title>
-                    <Button transparent>
-                        <Icon name='md-menu' style={styles.headerButton}/>
-                    </Button>
+                    <Title style={[styles.headerButton, styles.fontAvenir]}>Messages</Title>
                 </Header>
                 <Content style={[styles.content]}>
                     <View>

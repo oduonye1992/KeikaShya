@@ -7,6 +7,8 @@ import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon } fr
 import HeaderComponent from '../../components/header';
 import {Actions} from 'react-native-router-flux';
 import ListItemDeletableComponent from '../../components/list_item_deletable';
+import store from '../../store/store';
+import SearchBar from 'react-native-search-bar';
 
 export default class FeeComponent extends Component {
     ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -15,11 +17,68 @@ export default class FeeComponent extends Component {
         this.state = {
             dataSource: this.ds.cloneWithRows(
                 [{
-                    title : 'Name',
-                    description1 : 'Daniel Oduonye',
-                    description2 : 'Daniel Oduonye',
+                    title : 'Security Fee',
+                    description1 : '10 Apr 2015',
+                    description2 : '0.00',
+                    description_side : '$500',
                     icon : 'ios-menu-outline'
-                }]
+                },
+                    {
+                        title : 'Security Fee',
+                        description1 : '10 Apr 2015',
+                        description2 : '0.00',
+                        description_side : '$500',
+                        icon : 'ios-menu-outline'
+                    },
+                    {
+                        title : 'Security Fee',
+                        description1 : '10 Apr 2015',
+                        description2 : '0.00',
+                        description_side : '$500',
+                        icon : 'ios-menu-outline'
+                    },
+                    {
+                        title : 'Security Fee',
+                        description1 : '10 Apr 2015',
+                        description2 : '0.00',
+                        description_side : '$500',
+                        icon : 'ios-menu-outline'
+                    },
+                    {
+                        title : 'Security Fee',
+                        description1 : '10 Apr 2015',
+                        description2 : '0.00',
+                        description_side : '$500',
+                        icon : 'ios-menu-outline'
+                    },{
+                    title : 'Security Fee',
+                    description1 : '10 Apr 2015',
+                    description2 : '0.00',
+                    description_side : '$500',
+                    icon : 'ios-menu-outline'
+                },{
+                    title : 'Security Fee',
+                    description1 : '10 Apr 2015',
+                    description2 : '0.00',
+                    description_side : '$500',
+                    icon : 'ios-menu-outline'
+                },{
+                    title : 'Security Fee',
+                    description1 : '10 Apr 2015',
+                    description2 : '0.00',
+                    description_side : '$500',
+                    icon : 'ios-menu-outline'
+                },
+                    {
+                        title : 'Security Fee',
+                        description1 : '10 Apr 2015',
+                        description2 : '0.00',
+                        description_side : '$500',
+                        icon : 'ios-menu-outline'
+                    },
+
+
+                ]
             )
         }
     }
@@ -30,16 +89,26 @@ export default class FeeComponent extends Component {
         return (
             <Container style={styles.container}>
                 <Header style={styles.header}>
-                    <Button transparent>
-                        <Icon name='md-add' style={styles.headerButton}/>
+                    <Button
+                        onPress = {() => {
+                            store.dispatch({
+                                type : 'OPEN_DRAWER'
+                            })
+                        }}
+                        transparent>
+                        <Icon name='ios-menu-outline' style={styles.headerButton}/>
                     </Button>
                     <Title style={[styles.headerButton, styles.fontAvenir]}>Fees</Title>
                     <Button transparent>
-                        <Icon name='md-menu' style={styles.headerButton}/>
+                        <Icon name='ios-funnel-outline' style={styles.headerButton}/>
                     </Button>
                 </Header>
                 <Content style={[styles.content]}>
                     <View>
+                        <SearchBar
+                            ref='searchBar'
+                            placeholder='Search'
+                        />
                         <View style={{padding:10}}>
                             <ListView
                                 dataSource={this.state.dataSource}
@@ -50,6 +119,7 @@ export default class FeeComponent extends Component {
                                             title = {rowData.title}
                                             description1 =  {rowData.description1}
                                             description2 =  {rowData.description2}
+                                            description_side = {rowData.description_side}
                                             icon = {rowData.icon}
                                         />
                                     }

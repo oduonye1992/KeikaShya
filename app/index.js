@@ -69,7 +69,13 @@ export default class Keisha extends Component {
         this.subscribe();
     }
     subscribe(){
-
+        let that = this;
+        store.subscribe(function() {
+            // Update your views here
+            that.setState({
+                parent : store.getState()
+            });
+        })
     }
     render() {
         const drawerStyles = {
@@ -81,6 +87,8 @@ export default class Keisha extends Component {
                 ref={(ref) => this._drawer = ref}
                 openDrawerOffset={100}
                 type="static"
+                tapToClose={true}
+                open = {this.state.parent.drawerOpen}
                 styles={drawerStyles}
                 content={<HeaderComponent />}
                 tweenHandler={Drawer.tweenPresets.parallax}
@@ -92,18 +100,20 @@ export default class Keisha extends Component {
                     <Scene key="accounts" component={AccountsComponent} hideNavBar={true} />
                     <Scene key="login" component={LoginComponent} hideNavBar={true} />
                     <Scene key="reset_password" component={ForgotComponent} hideNavBar={true} />
-                    <Scene key="chat" component={ChatComponent} hideNavBar={true} />
-                    <Scene key="group_details" tabs={true}>
-                        <Scene key="group_members" component={GroupPeopleComponent} hideNavBar={true} title="Members" icon={TabIcon} navigationBarStyle={{backgroundColor:'red'}} titleStyle={{color:'white'}}/>
-                        <Scene key="group_students" component={GroupMembersComponent} hideNavBar={true} title="Students" icon={TabIcon} navigationBarStyle={{backgroundColor:'red'}} titleStyle={{color:'white'}}/>
-                        <Scene key="group_events" component={GroupEventsComponent} hideNavBar={true} title="Events" icon={TabIcon} navigationBarStyle={{backgroundColor:'red'}} titleStyle={{color:'white'}}/>
-                        <Scene key="group_messages" component={GroupMessageComponent} hideNavBar={true} title="Messages" icon={TabIcon} navigationBarStyle={{backgroundColor:'red'}} titleStyle={{color:'white'}}/>
-                    </Scene>
                     <Scene key="groups" component={GroupsComponent} hideNavBar={true} />
+                    <Scene key="group_details">
+                        <Scene key="dsdssd" tabs={true} tabBarStyle={styles.tabBarStyle}>
+                            <Scene key="group_members" component={GroupPeopleComponent} hideNavBar={true} title="Members" icon={TabIcon} navigationBarStyle={{backgroundColor:'red'}} titleStyle={{color:'white'}}/>
+                            <Scene key="group_students" component={GroupMembersComponent} hideNavBar={true} title="Students" icon={TabIcon} navigationBarStyle={{backgroundColor:'red'}} titleStyle={{color:'white'}}/>
+                            <Scene key="group_events" component={GroupEventsComponent} hideNavBar={true} title="Events" icon={TabIcon} navigationBarStyle={{backgroundColor:'red'}} titleStyle={{color:'white'}}/>
+                            <Scene key="group_messages" component={GroupMessageComponent} hideNavBar={true} title="Messages" icon={TabIcon} navigationBarStyle={{backgroundColor:'red'}} titleStyle={{color:'white'}}/>
+                        </Scene>
+                        <Scene key="chat" component={ChatComponent} hideNavBar={true} />
+                        <Scene key="profile" component={ProfileComponent} hideNavBar={true} title="Form"/>
+                    </Scene>
                     <Scene key="pending_fees" component={PendingFeeComponent} hideNavBar={true} />
                     <Scene key="fees" component={FeeComponent} hideNavBar={true} title="Form"/>
                     <Scene key="parents" component={ParentComponent} hideNavBar={true} title="Form"/>
-                    <Scene key="profile" component={ProfileComponent} hideNavBar={true} title="Form"/>
                     <Scene key="login" component={LoginComponent} hideNavBar={true} title="Form"/>
                 </Router>
             </Drawer>
@@ -111,12 +121,9 @@ export default class Keisha extends Component {
     }
 }
 
-let style = StyleSheet.create({
+let styles = StyleSheet.create({
     tabBarStyle: {
-        borderTopWidth : .5,
-        borderColor    : '#b7b7b7',
         backgroundColor: 'white',
-        opacity        : 1
     },
     navigationBarStyle  : {
         backgroundColor:'transparent',
