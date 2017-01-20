@@ -8,7 +8,6 @@ import HeaderComponent from '../../components/header';
 import {Actions} from 'react-native-router-flux';
 import ListItemDeletableComponent from '../../components/list_item_deletable';
 import store from '../../store/store';
-import SearchBar from 'react-native-search-bar';
 
 export default class ParentComponent extends Component {
     ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -92,10 +91,7 @@ export default class ParentComponent extends Component {
                 </Header>
                 <Content style={[styles.content]}>
                     <View>
-                        <SearchBar
-                            ref='searchBar'
-                            placeholder='Search'
-                        />
+
                         <View style={{padding:10}}>
                             <ListView
                                 dataSource={this.state.dataSource}

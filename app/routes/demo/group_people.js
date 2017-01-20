@@ -7,7 +7,6 @@ import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon } fr
 import HeaderComponent from '../../components/header';
 import {Actions} from 'react-native-router-flux';
 import ListWithImageComponent from '../../components/list_with_image';
-import SearchBar from 'react-native-search-bar';
 
 export default class GroupPeopleComponent extends Component {
     ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -85,10 +84,6 @@ export default class GroupPeopleComponent extends Component {
                 </Header>
                 <Content style={[styles.content]}>
                     <View>
-                        <SearchBar
-                            ref='searchBar'
-                            placeholder='Search'
-                        />
                         <View style={{padding:20}}>
                             <ListView
                                 dataSource={this.state.dataSource}

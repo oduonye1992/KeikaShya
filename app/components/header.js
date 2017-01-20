@@ -43,6 +43,39 @@ export default class HeaderComponent extends Component{
             )
         };
     }
+    renderSidebar(){
+        return (
+            <View>
+                <View>
+                    <View style={{height:200, backgroundColor : '#ecf0f1', alignItems:'center', justifyContent:'center'}}>
+                        <Image style={styles.image} source={{uri: 'https://source.unsplash.com/random/100x100'}}/>
+                    </View>
+                </View>
+                <View style={{padding:10}}>
+                    <ListView
+                        dataSource={this.state.dataSource}
+                        renderRow={
+                                (rowData) => {
+                                    return <ListWithIconComponent
+                                        onClick = {this.onClick.bind(this)}
+                                        title = {rowData.title}
+                                        icon = {rowData.icon}
+                                        data = {rowData}
+                                    />
+                                }
+                            }
+                    />
+                </View>
+                <Footer >
+                    <Footer style={styles.footer}>
+                        <TouchableHighlight>
+                            <Text style={styles.footerText}>Switch to Teacher</Text>
+                        </TouchableHighlight>
+                    </Footer>
+                </Footer>
+            </View>
+        );
+    }
     onClick(data){
         if (data.title == 'Accounts'){
             Actions.accounts();
@@ -67,35 +100,50 @@ export default class HeaderComponent extends Component{
     render(){
         return (
             <Container style={styles.container}>
+                <Header style={{backgroundColor:'#8584d8'}}>
+                    <Button
+                        onPress = {() => {
+                            Actions.pop()
+                        }}
+                        transparent>
+                        <Icon name='ios-grid-outline' style={{color:'#8584d8'}}/>
+                    </Button>
+                    <Title style={[styles.headerButton, styles.fontAvenir]}></Title>
+                    <Button transparent>
+                        <Icon name='ios-grid-outline' style={{color:'white'}}/>
+                    </Button>
+                </Header>
                 <Content style={styles.content}>
                     <View>
-                        <View style={{height:200, backgroundColor : '#ecf0f1', alignItems:'center', justifyContent:'center'}}>
+                        <View style={{height:200, backgroundColor : '#8584d8', alignItems:'center', justifyContent:'center'}}>
                             <Image style={styles.image} source={{uri: 'https://source.unsplash.com/random/100x100'}}/>
+                            <Text style={{fontFamily: 'Avenir Next', color:'white', fontSize:30, padding:10}}>Namarata</Text>
+                            <Text style={{fontFamily: 'AvenirNext-Medium', color:'white'}}>Student</Text>
+                        </View>
+                        <View style={{paddingTop:10}}>
+                            <View style={{alignItems:'center', padding:16}}>
+                                <Text style={{fontFamily: 'Avenir Next', color:'#2c3e50', fontSize:30}}>Home</Text>
+                            </View>
+                            <View style={{alignItems:'center', padding:16}}>
+                                <Text style={{fontFamily: 'Avenir Next', color:'#2c3e50', fontSize:30}}>Profile</Text>
+                            </View>
+                            <View style={{alignItems:'center', padding:16}}>
+                                <Text style={{fontFamily: 'Avenir Next', color:'#2c3e50', fontSize:30}}>Feed</Text>
+                            </View>
+                            <View style={{alignItems:'center', padding:16, flexDirection:'row', width:350}}>
+                                <Text style={{marginLeft:60, fontFamily: 'Avenir Next', color:'#2c3e50', fontSize:30}}>Messages </Text>
+                                <TouchableHighlight
+                                    style={{backgroundColor:'#e7645a', padding:7,paddingLeft:9,paddingRight:9, borderRadius:50}}
+                                >
+                                    <Text style={{fontFamily: 'Avenir Next', color:'white', fontSize:10}}>1</Text>
+                                </TouchableHighlight>
+                            </View>
+                            <View style={{alignItems:'center', padding:16}}>
+                                <Text style={{fontFamily: 'Avenir Next', color:'#2c3e50', fontSize:30}}>Settings</Text>
+                            </View>
                         </View>
                     </View>
-                    <View style={{padding:10}}>
-                        <ListView
-                            dataSource={this.state.dataSource}
-                            renderRow={
-                                (rowData) => {
-                                    return <ListWithIconComponent
-                                        onClick = {this.onClick.bind(this)}
-                                        title = {rowData.title}
-                                        icon = {rowData.icon}
-                                        data = {rowData}
-                                    />
-                                }
-                            }
-                        />
-                    </View>
                 </Content>
-                <Footer >
-                    <Footer style={styles.footer}>
-                        <TouchableHighlight>
-                            <Text style={styles.footerText}>Switch to Teacher</Text>
-                        </TouchableHighlight>
-                    </Footer>
-                </Footer>
             </Container>
         );
     }
@@ -113,7 +161,9 @@ const styles = StyleSheet.create({
     image: {
         height: 100,
         borderRadius: 50,
-        width: 100
+        width: 100,
+        borderWidth:2,
+        borderColor:'white'
     },
     headerButton : {
 
