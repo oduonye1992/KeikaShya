@@ -28,45 +28,117 @@ export default class WalkthroughComponent extends Component {
             <Container style={styles.container}>
                 <Content style={[styles.content]}>
                     <Swiper style={styles.wrapper}
+                            dot={<View style={{backgroundColor: 'rgba(255,255,255,.3)', width: 13, height: 13, borderRadius: 7, marginTop:-280, marginLeft: 7, marginRight: 7}} />}
+                            activeDot={<View style={{backgroundColor: '#fff', width: 13, height: 13, borderRadius: 7, marginLeft: 7,  marginTop:-280, marginRight: 7}} />}
                             showsButtons={false}>
-                        <View style={[styles.slide1, {backgroundColor:'#f1c40f'}]}>
-                            <View style={{alignItems:'flex-start', flexDirection : 'row', justifyContent : 'space-between', width:320}}>
-                                <Text style={{fontFamily: 'Avenir Next', color : '#34495e', fontWeight:'bold', fontSize:20}}>Learn </Text>
-                                <Icon name = "ios-arrow-forward-outline" style={{color:'#34495e'}} />
-                            </View>
+                        <View style={[styles.slide1, {backgroundColor:'#9293d8'}]}>
                             <View style={{marginTop:30}}>
-                                <Image style={{height:400, width:270, borderRadius:5}} source={{uri : 'https://s-media-cache-ak0.pinimg.com/564x/a6/95/41/a6954179a48dcf18e9e98355b700fef8.jpg'}} />
+                                <Image style={{height:200, width:120, borderRadius:5}} source={require('../../images/walkthrough.png')} />
                             </View>
-                            <View style={{marginTop:70}}>
-                                <Text style={{fontFamily: 'Avenir Next', color : '#34495e', fontWeight:'bold'}}>Tap empty Cell to add images, website and text. </Text>
+                            <View style={{marginTop:40, alignItems:'center'}}>
+                                <Text style={{fontWeight:20, fontFamily: 'Avenir Next', color : 'white', fontWeight:'bold'}}>
+                                    Learn More
+                                </Text>
+                                <Text style={{marginTop:20, width:300, alignItems:'center', fontFamily: 'Avenir Next', color : 'white', fontWeight:'bold'}}>
+                                    Tap empty Cell to add images, website and text.
+                                    Tap empty Cell to add images, website and text.
+                                    Tap empty Cell to add images, website and text.
+                                </Text>
+                            </View>
+                            <View>
+                                <TouchableHighlight
+                                    style={{
+                                        marginTop:140,
+                                        borderWidth:.5,
+                                        borderColor:'white',
+                                        padding:12,
+                                        paddingLeft:60,
+                                        paddingRight:60
+                                    }}
+                                >
+                                    <Text style={{fontFamily: 'Avenir Next', color : 'white'}}>Skip</Text>
+                                </TouchableHighlight>
                             </View>
                         </View>
-                        <View style={[styles.slide1, {backgroundColor:'#3498db'}]}>
-                            <View style={{alignItems:'flex-start', flexDirection : 'row', justifyContent : 'space-between', width:320}}>
-                                <Text style={{fontFamily: 'Avenir Next', color : 'white', fontWeight:'bold', fontSize:20}}>Enjoy </Text>
-                                <Icon name = "ios-arrow-forward-outline" style={{color:'white'}} />
-                            </View>
+                        <View style={[styles.slide1, {backgroundColor:'#9293d8'}]}>
                             <View style={{marginTop:30}}>
-                                <Image style={{height:400, width:270, borderRadius:5}} source={{uri : 'https://img04.alkislarlayasiyorum.com/images/members/50_50/315/315282_1.jpg'}} />
+                                <Image style={{height:200, width:120, borderRadius:5}} source={require('../../images/walkthrough.png')} />
                             </View>
-                            <View style={{marginTop:70}}>
-                                <Text style={{fontFamily: 'Avenir Next', color : 'white', fontWeight:'bold'}}>Tap empty Cell to add images, website and text. </Text>
+                            <View style={{marginTop:30, alignItems:'center'}}>
+                                <Text style={{fontWeight:20, fontFamily: 'Avenir Next', color : 'white', fontWeight:'bold'}}>Learn</Text>
+                                <Text style={{marginTop:20, width:300, alignItems:'center', fontFamily: 'Avenir Next', color : 'white', fontWeight:'bold'}}>
+                                    Tap empty Cell to add images, website and text.
+                                    Tap empty Cell to add images, website and text.
+                                    Tap empty Cell to add images, website and text.
+                                </Text>
+                            </View>
+                            <View>
+                                <TouchableHighlight
+                                    style={{
+                                        marginTop:15,
+                                        borderWidth:.5,
+                                        borderColor:'white',
+                                        padding:12,
+                                        paddingLeft:60,
+                                        paddingRight:60
+                                    }}
+                                >
+                                    <Text style={{fontFamily: 'Avenir Next', color : 'white', fontWeight:'bold'}}>Learn</Text>
+                                </TouchableHighlight>
                             </View>
                         </View>
-                        <View style={[styles.slide1, {backgroundColor:'white'}]}>
-                            <TouchableHighlight
-                                onPress={Actions.main_home}
-                            >
-                                <View style={{alignItems:'flex-start', flexDirection : 'row', justifyContent : 'space-between', width:320}}>
-                                    <Text style={{fontFamily: 'Avenir Next', color : '#2c3e50', fontWeight:'bold', fontSize:20}}>Share </Text>
-                                    <Icon name = "ios-log-in-outline" style={{color:'#2c3e50'}} />
-                                </View>
-                            </TouchableHighlight>
+                        <View style={[styles.slide1, {backgroundColor:'#9293d8'}]}>
                             <View style={{marginTop:30}}>
-                                <Image style={{height:400, width:270, borderRadius:5}} source={{uri : 'https://img1.etsystatic.com/060/0/10776027/il_570xN.739747103_gjsq.jpg'}} />
+                                <Image style={{height:200, width:120, borderRadius:5}} source={require('../../images/walkthrough.png')} />
                             </View>
-                            <View style={{marginTop:70}}>
-                                <Text style={{fontFamily: 'Avenir Next', color : '#2c3e50', fontWeight:'bold'}}>Tap empty Cell to add images, website and text. </Text>
+                            <View style={{marginTop:30, alignItems:'center'}}>
+                                <Text style={{fontWeight:20, fontFamily: 'Avenir Next', color : 'white', fontWeight:'bold'}}>Learn</Text>
+                                <Text style={{marginTop:20, width:300, alignItems:'center', fontFamily: 'Avenir Next', color : 'white', fontWeight:'bold'}}>
+                                    Tap empty Cell to add images, website and text.
+                                    Tap empty Cell to add images, website and text.
+                                    Tap empty Cell to add images, website and text.
+                                </Text>
+                            </View>
+                            <View>
+                                <TouchableHighlight
+                                    style={{
+                                        marginTop:15,
+                                        borderWidth:.5,
+                                        borderColor:'white',
+                                        padding:12,
+                                        paddingLeft:60,
+                                        paddingRight:60
+                                    }}
+                                >
+                                    <Text style={{fontFamily: 'Avenir Next', color : 'white', fontWeight:'bold'}}>Learn</Text>
+                                </TouchableHighlight>
+                            </View>
+                        </View>
+                        <View style={[styles.slide1, {backgroundColor:'#9293d8'}]}>
+                            <View style={{marginTop:30}}>
+                                <Image style={{height:200, width:120, borderRadius:5}} source={require('../../images/walkthrough.png')} />
+                            </View>
+                            <View style={{marginTop:30, alignItems:'center'}}>
+                                <Text style={{fontWeight:20, fontFamily: 'Avenir Next', color : 'white', fontWeight:'bold'}}>Learn</Text>
+                                <Text style={{marginTop:20, width:300, alignItems:'center', fontFamily: 'Avenir Next', color : 'white', fontWeight:'bold'}}>
+                                    Tap empty Cell to add images, website and text.
+                                    Tap empty Cell to add images, website and text.
+                                    Tap empty Cell to add images, website and text.
+                                </Text>
+                            </View>
+                            <View>
+                                <TouchableHighlight
+                                    style={{
+                                        marginTop:15,
+                                        borderWidth:.5,
+                                        borderColor:'white',
+                                        padding:12,
+                                        paddingLeft:60,
+                                        paddingRight:60
+                                    }}
+                                >
+                                    <Text style={{fontFamily: 'Avenir Next', color : 'white', fontWeight:'bold'}}>Learn</Text>
+                                </TouchableHighlight>
                             </View>
                         </View>
                     </Swiper>

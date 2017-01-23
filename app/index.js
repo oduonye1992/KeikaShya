@@ -94,6 +94,7 @@ export default class Keisha extends Component {
                 tweenHandler={Drawer.tweenPresets.parallax}
             >
                 <Router>
+                    <Scene key="main_walkthrough" component={WalkthroughComponent} hideNavBar={true} />
                     <Scene key="accounts" component={AccountsComponent} hideNavBar={true} />
                     <Scene key="login" component={LoginComponent} hideNavBar={true} />
                     <Scene key="main_walkthrough" component={WalkthroughComponent} hideNavBar={true} />
