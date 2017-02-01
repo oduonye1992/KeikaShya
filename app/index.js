@@ -27,7 +27,6 @@ import OptionsalEmailComponent from './routes/form/optional_email';
 // New Designs
 
 import HomeComponent from './routes/home';
-import PlaygroundComponent from './routes/home/playground';
 import FormsComponent from './routes/newdesign/form';
 import OrdersComponent from './routes/newdesign/orders';
 import OrderDetailComponent from './routes/newdesign/order_detail';
@@ -51,6 +50,7 @@ import AccountsComponent from './routes/demo/accounts';
 import Drawer from 'react-native-drawer';
 import store from './store/store';
 import HeaderComponent from './components/header';
+import PlaygroundComponent from './routes/newdesign/playground';
 class TabIcon extends Component {
     render(){
         return (
@@ -89,11 +89,10 @@ export default class Keisha extends Component {
                 type="static"
                 tapToClose={true}
                 open = {this.state.parent.drawerOpen}
-                styles={drawerStyles}
                 content={<HeaderComponent />}
-                tweenHandler={Drawer.tweenPresets.parallax}
             >
                 <Router>
+                    <Scene key="playground" component={PlaygroundComponent} hideNavBar={true} />
                     <Scene key="main_walkthrough" component={WalkthroughComponent} hideNavBar={true} />
                     <Scene key="accounts" component={AccountsComponent} hideNavBar={true} />
                     <Scene key="login" component={LoginComponent} hideNavBar={true} />
