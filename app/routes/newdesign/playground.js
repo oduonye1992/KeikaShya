@@ -181,7 +181,7 @@ export default class PlaygroundComponent extends Component {
             </Container>
         );
     }
-    render() {
+    renderFourthScreen(){
         let {height, width} = Dimensions.get('window');
         return (
             <Container style={styles.container}>
@@ -198,8 +198,34 @@ export default class PlaygroundComponent extends Component {
                     <Title style={[styles.colorWhite, styles.fontAvenir]}>MINHA VIAGEM</Title>
                 </Header>
                 <Content>
-                    <View style={{padding:10}}>
+                    <View style={{padding:20, marginTop:20}}>
                         <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10}}>
+                            <View style={{ alignItems:'flex-start', padding:10, flexDirection:'row', justifyContent:'space-around'}}>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
+                                    <TextInput placeholder="Nome de Roterio" style={{height:30, width:width*0.8}}/>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={{flexDirection:'row',marginTop:10}}>
+                            <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10, marginTop:10}}>
+                                <View style={{ alignItems:'flex-start', padding:10, flexDirection:'row', justifyContent:'space-around'}}>
+                                    <View style={{flexDirection:'row'}}>
+                                        <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
+                                        <TextInput placeholder="Data partida" style={{height:30, width:width*0.33}}/>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10, marginTop:10, marginLeft:10}}>
+                                <View style={{ alignItems:'flex-start', padding:10, flexDirection:'row', justifyContent:'space-around'}}>
+                                    <View style={{flexDirection:'row'}}>
+                                        <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
+                                        <TextInput placeholder="Data Roterio" style={{height:30, width:width*0.33}}/>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10, marginTop:15}}>
                             <View style={{ alignItems:'flex-start', padding:10, flexDirection:'row', justifyContent:'space-around'}}>
                                 <View style={{flexDirection:'row'}}>
                                     <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
@@ -208,6 +234,35 @@ export default class PlaygroundComponent extends Component {
                                 <Icon name='ios-menu-outline' style={{color:'grey'}}/>
                             </View>
                         </View>
+                        <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10, marginTop:15}}>
+                            <View style={{ alignItems:'flex-start', padding:10, flexDirection:'row', justifyContent:'space-around'}}>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
+                                    <TextInput placeholder="Tipo de Roterio" style={{height:30, width:width*0.4}}/>
+                                </View>
+                                <View style={{flexDirection:'row', padding:8}}>
+                                    <Icon name='ios-menu-outline' style={{color:'#16c1d5', fontSize:16}}/>
+                                    <Text style={{fontFamily: 'Avenir Next', color:'grey'}}> Publico</Text>
+                                </View>
+                                <View style={{flexDirection:'row', marginLeft:10, padding:8}}>
+                                    <Icon name='ios-menu-outline' style={{color:'grey', fontSize:16}}/>
+                                    <Text style={{fontFamily: 'Avenir Next', color:'grey'}}> Privado</Text>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={{marginTop:15}}>
+                            <TouchableHighlight
+                                style={{height:height*0.25, borderRadius:10, backgroundColor : '#16c1d5', justifyContent:'center', alignItems:'center'}}
+                            >
+                                <View style={{alignItems:'center'}}>
+                                    <Icon name='ios-menu-outline' style={{color:'white', fontSize:60}}/>
+                                    <View style={{alignItems:'center', width:width*0.5}}>
+                                        <Text style={{fontFamily: 'Avenir Next', color:'white', fontSize:14, fontWeight:'500'}}>Adicione uma imagem para o seu roterio</Text>
+                                    </View>
+                                </View>
+                            </TouchableHighlight>
+                        </View>
+
                         <View style={{marginTop:25}}>
                             <TouchableHighlight
                                 style={{backgroundColor:'#16c1d5', borderRadius:10, padding:15, alignItems:'center'}}
@@ -219,6 +274,127 @@ export default class PlaygroundComponent extends Component {
                 </Content>
             </Container>
         );
+    }
+    renderFifthScreen(){
+        let {height, width} = Dimensions.get('window');
+        return (
+            <Container style={styles.container}>
+                <Header style={{backgroundColor:'#1dc1d5'}}>
+                    <Button
+                        onPress = {() => {
+                            store.dispatch({
+                                type : 'OPEN_DRAWER'
+                            })
+                        }}
+                        transparent>
+                        <Icon name='ios-menu-outline' style={{color:'white'}}/>
+                    </Button>
+                    <Title style={[styles.colorWhite, styles.fontAvenir]}>PROCURA ROTEIRO</Title>
+                </Header>
+                <Content>
+                    <View style={{padding:20, marginTop:10}}>
+                        <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10, marginTop:15}}>
+                            <View style={{ alignItems:'flex-start', padding:10, paddingLeft:20, paddingRight:20, flexDirection:'row', justifyContent:'space-around'}}>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
+                                    <TextInput placeholder="Nome de Roterio" style={{height:30, width:width*0.8}}/>
+                                </View>
+                                <Icon name='ios-menu-outline' style={{color:'grey'}}/>
+                            </View>
+                        </View>
+                        <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10, marginTop:15, marginBottom:10}}>
+                            <View style={{ alignItems:'flex-start', padding:10, paddingLeft:20, paddingRight:20, flexDirection:'row', justifyContent:'space-around'}}>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
+                                    <TextInput placeholder="Nome de Roterio" style={{height:30, width:width*0.8}}/>
+                                </View>
+                                <Icon name='ios-menu-outline' style={{color:'grey'}}/>
+                            </View>
+                        </View>
+                        <TouchableHighlight
+                            underlayColor="#f5f5f5"
+                            onPress = {()=>{}}
+                        >
+                            <View style={{paddingTop:10, paddingBottom:10}}>
+                                <View style={{marginBottom:10, padding:5}}>
+                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
+                                </View>
+                                <Hr lineColor='#ecf0f5' width="100"/>
+                            </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            underlayColor="#f5f5f5"
+                            onPress = {()=>{}}
+                        >
+                            <View style={{paddingTop:10, paddingBottom:10}}>
+                                <View style={{marginBottom:10, padding:5}}>
+                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
+                                </View>
+                                <Hr lineColor='#ecf0f5' width="100"/>
+                            </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            underlayColor="#f5f5f5"
+                            onPress = {()=>{}}
+                        >
+                            <View style={{paddingTop:10, paddingBottom:10}}>
+                                <View style={{marginBottom:10, padding:5}}>
+                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
+                                </View>
+                                <Hr lineColor='#ecf0f5' width="100"/>
+                            </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            underlayColor="#f5f5f5"
+                            onPress = {()=>{}}
+                        >
+                            <View style={{paddingTop:10, paddingBottom:10}}>
+                                <View style={{marginBottom:10, padding:5}}>
+                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
+                                </View>
+                                <Hr lineColor='#ecf0f5' width="100"/>
+                            </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            underlayColor="#f5f5f5"
+                            onPress = {()=>{}}
+                        >
+                            <View style={{paddingTop:10, paddingBottom:10}}>
+                                <View style={{marginBottom:10, padding:5}}>
+                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
+                                </View>
+                                <Hr lineColor='#ecf0f5' width="100"/>
+                            </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            underlayColor="#f5f5f5"
+                            onPress = {()=>{}}
+                        >
+                            <View style={{paddingTop:10, paddingBottom:10}}>
+                                <View style={{marginBottom:10, padding:5}}>
+                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
+                                </View>
+                                <Hr lineColor='#ecf0f5' width="100"/>
+                            </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight
+                            underlayColor="#f5f5f5"
+                            onPress = {()=>{}}
+                        >
+                            <View style={{paddingTop:10, paddingBottom:10}}>
+                                <View style={{marginBottom:10, padding:5}}>
+                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
+                                </View>
+                                <Hr lineColor='#ecf0f5' width="100"/>
+                            </View>
+                        </TouchableHighlight>
+                    </View>
+                </Content>
+            </Container>
+        );
+    }
+    render() {
+        return this.renderFirstPage();
     }
 }
 const styles = StyleSheet.create({

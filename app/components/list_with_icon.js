@@ -12,7 +12,12 @@ export default class ListWithIconComponent extends Component{
     render(){
         return (
             <TouchableHighlight
-                onPress={this.onClick.bind(this)}
+                underlayColor="#f5f5f5"
+                onPress={() => {
+                    requestAnimationFrame(() => {
+                        this.onClick()
+                    });
+                }}
             >
                 <View style={{padding : 10}}>
                     <View style={{flexDirection:'row', justifyContent:'flex-start', paddingBottom:20}}>

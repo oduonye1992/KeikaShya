@@ -12,46 +12,53 @@ export default class HeaderComponent extends Component{
             dataSource: this.ds.cloneWithRows(
                 [
                     {
-                        title: 'Analytics',
+                        title: 'First Screen',
                         icon: 'ios-chatbubbles-outline'
                     },
                     {
-                        title: 'Parent',
+                        title: 'Second Screen',
                         icon: 'ios-people-outline'
                     },
                     {
-                        title: 'Fees',
+                        title: 'Third Screen',
                         icon: 'ios-cash-outline'
                     },
                     {
-                        title: 'Reciepts',
+                        title: 'Fourth Screen',
                         icon: 'ios-card-outline'
                     },
                     {
-                        title: 'Groups',
+                        title: 'Fifth Screen',
                         icon: 'ios-contacts-outline'
-                    },
-                    {
-                        title: 'Accounts',
-                        icon: 'ios-aperture-outline'
-                    },
-                    {
-                        title: 'Messages',
-                        icon: 'ios-chatbubbles-outline'
-                    },
+                    }
                 ]
             )
         };
     }
+    renderProfileView(){
+        return  (
+            <View>
+                <View style={{height:200, backgroundColor : '#ecf0f1', alignItems:'center', justifyContent:'center'}}>
+                    <Image style={styles.image} source={{uri: 'https://source.unsplash.com/random/100x100'}}/>
+                </View>
+            </View>
+        );
+    }
+    dummyFooter (){
+        /*
+         <Footer >
+         <Footer style={styles.footer}>
+         <TouchableHighlight>
+         <Text style={styles.footerText}>Switch to Teacher</Text>
+         </TouchableHighlight>
+         </Footer>
+         </Footer>
+         */
+    }
     renderSidebar(){
         return (
             <View>
-                <View>
-                    <View style={{height:200, backgroundColor : '#ecf0f1', alignItems:'center', justifyContent:'center'}}>
-                        <Image style={styles.image} source={{uri: 'https://source.unsplash.com/random/100x100'}}/>
-                    </View>
-                </View>
-                <View style={{padding:10}}>
+                <View style={{padding:10, marginTop:30}}>
                     <ListView
                         dataSource={this.state.dataSource}
                         renderRow={
@@ -66,27 +73,20 @@ export default class HeaderComponent extends Component{
                             }
                     />
                 </View>
-                <Footer >
-                    <Footer style={styles.footer}>
-                        <TouchableHighlight>
-                            <Text style={styles.footerText}>Switch to Teacher</Text>
-                        </TouchableHighlight>
-                    </Footer>
-                </Footer>
             </View>
         );
     }
     onClick(data){
-        if (data.title == 'Accounts'){
-            Actions.accounts();
-        } else if (data.title == 'Parent'){
-            Actions.parents();
-        } else if (data.title == 'Fees'){
-            Actions.fees();
-        } else if (data.title == 'Reciepts'){
-            Actions.pending_fees();
-        } else if (data.title == 'Accounts'){
-            Actions.accounts();
+        if (data.title == 'First Screen'){
+            Actions.first_screen();
+        } else if (data.title == 'Second Screen'){
+            Actions.second_screen();
+        } else if (data.title == 'Third Screen'){
+            Actions.third_screen();
+        } else if (data.title == 'Fourth Screen'){
+            Actions.fourth_screen();
+        } else if (data.title == 'Fifth Screen'){
+            Actions.fifth_screen();
         } else if (data.title == 'Messages'){
             Actions.accounts();
         } else if (data.title == 'Groups'){
@@ -95,9 +95,8 @@ export default class HeaderComponent extends Component{
         store.dispatch({
             type : 'CLOSE_DRAWER'
         })
-
     }
-    render(){
+    renderUglySidebar(){
         return (
             <Container style={styles.container}>
                 <Header style={{backgroundColor:'#8584d8'}}>
@@ -146,6 +145,9 @@ export default class HeaderComponent extends Component{
                 </Content>
             </Container>
         );
+    }
+    render(){
+        return this.renderSidebar();
     }
 }
 const styles = StyleSheet.create({
