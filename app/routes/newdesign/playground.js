@@ -4,6 +4,7 @@ import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon } fr
 import {Actions} from 'react-native-router-flux';
 import store from '../../store/store';
 import Hr from '../../lib/hr';
+import AppSettings from '../../config/settings';
 
 export default class PlaygroundComponent extends Component {
     ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -15,111 +16,65 @@ export default class PlaygroundComponent extends Component {
         };
     }
     renderFirstPage(){
-        let {height, width} = Dimensions.get('window');
         return (
-            <Container style={styles.container}>
-                <Header style={{backgroundColor:'#1dc1d5'}}>
-                    <Button
-                        onPress = {() => {
-                            store.dispatch({
-                                type : 'OPEN_DRAWER'
-                            })
-                        }}
-                        transparent>
-                        <Icon name='ios-menu-outline' style={{color:'white'}}/>
-                    </Button>
-                    <Title style={[styles.colorWhite, styles.fontAvenir]}></Title>
-                </Header>
-                <Content style={{backgroundColor:'#30c7d9'}}>
-                    <View style={{height:height*0.84, alignItems:'center', justifyContent:'center'}}>
-                        <TouchableHighlight
-                            style={{borderWidth:1.5,alignItems:'center', justifyContent:'center', borderColor:'white',borderRadius:5,  width:width*0.8, height:height*0.22}}
-                        >
-                            <View style={{alignItems:'center'}}>
-                                <Icon name='ios-menu-outline' style={{color:'white', fontSize:80, fontWeight:'bold'}}/>
-                                <Text style={{fontFamily: 'Avenir Next', color:'white', fontSize:13, fontWeight:'500'}}>ROTEIRO SALVO</Text>
-                            </View>
-                        </TouchableHighlight>
+            <Container>
+                <Content style={{backgroundColor:'#3a3c65'}}>
+                    <Image
+                        source={require('../../images/home_background.png')}
+                        style = {{resizeMode:'repeat',
+                            width: AppSettings.formatWidth(100),
+                            height:AppSettings.formatHeight(100), }}
+                    >
+                    <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+                        <Text style={{color:'white', fontFamily:'Avenir Next', fontSize:35}}>DCC MOBILE</Text>
+                        <Text style={{color:'#5b648a', fontFamily:'AvenirNext-Medium', fontSize:20}}>David's Christian Center App</Text>
                     </View>
+                    </Image>
                 </Content>
             </Container>
         );
     }
     renderSecondPage(){
-        let {height, width} = Dimensions.get('window');
         return (
-            <Container style={styles.container}>
-                <Header style={{backgroundColor:'#1dc1d5'}}>
+            <Container >
+                <Header style={{backgroundColor:'#232642'}}>
                     <Button
                         onPress = {() => {
-                            store.dispatch({
-                                type : 'OPEN_DRAWER'
-                            })
+                            requestAnimationFrame(() => {
+                                store.dispatch({
+                                    type : 'OPEN_DRAWER'
+                                })
+                            });
                         }}
                         transparent>
-                        <Icon name='ios-menu-outline' style={{color:'white'}}/>
+                        <Icon name='ios-arrow-round-back' style={{color:'#4cb2cb'}}/>
                     </Button>
-                    <Title style={[styles.colorWhite, styles.fontAvenir]}>MINHA VIAGEM</Title>
+                    <Title style={{color:'white', fontFamily:'Avenir Next'}}>EVENTS</Title>
+                    <Button
+                        onPress = {() => {
+                            requestAnimationFrame(() => {
+                                store.dispatch({
+                                    type : 'OPEN_DRAWER'
+                                })
+                            });
+                        }}
+                        transparent>
+                        <Icon name='ios-search-outline' style={{color:'#4cb2cb'}}/>
+                    </Button>
                 </Header>
-                <Content>
-                    <View style={{width:width, height:height*0.3}}>
-                        <Image source={require('../../images/map.png')}
-                               style={{width:width, height:height*0.3}}
-                        />
-                    </View>
-                    <View style={{padding:25}}>
-                        <View>
-                            <View style={{flexDirection:'row', justifyContent:'space-between', marginBottom:10}}>
-                                <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:28, fontWeight:'bold'}}>Adicionar local</Text>
-                                <TouchableHighlight
-                                    style={{padding:2,paddingRight:7,paddingLeft:7, borderWidth:1, borderColor:'grey', borderRadius:100}}
-                                >
-                                    <View>
-                                        <Icon name='ios-menu-outline' style={{color:'grey'}}/>
-                                    </View>
-                                </TouchableHighlight>
-                            </View>
-                            <Hr lineColor='#ecf0f1' width="100"/>
-                            <View style={{flexDirection:'row', justifyContent:'space-between', marginBottom:10,marginTop:10}}>
-                                <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:23, marginTop:8}}>Mulu Marriot Resort</Text>
-                                <TouchableHighlight
-                                    style={{padding:2,paddingRight:7,paddingLeft:7, borderWidth:1, borderColor:'#16c1d5', borderRadius:100}}
-                                >
-                                    <View>
-                                        <Icon name='ios-menu-outline' style={{color:'#16c1d5'}}/>
-                                    </View>
-                                </TouchableHighlight>
-                            </View>
-                            <Hr lineColor='#ecf0f1' width="100"/>
-                            <View style={{flexDirection:'row', justifyContent:'space-between', marginBottom:10,marginTop:10}}>
-                                <Text style={{fontFamily: 'Avenir Next', color:'grey', fontSize:23, marginTop:8}}>Mulu Marriot Resort</Text>
-                                <TouchableHighlight
-                                    style={{padding:2,paddingRight:7,paddingLeft:7, borderWidth:1, borderColor:'grey', borderRadius:100}}
-                                >
-                                    <View>
-                                        <Icon name='ios-menu-outline' style={{color:'grey'}}/>
-                                    </View>
-                                </TouchableHighlight>
-                            </View>
-                            <Hr lineColor='#ecf0f1' width="100"/>
-                            <View style={{flexDirection:'row', justifyContent:'space-between', marginBottom:10,marginTop:10}}>
-                                <Text style={{fontFamily: 'Avenir Next', color:'grey', fontSize:23, marginTop:8}}>Sungai River</Text>
-                                <TouchableHighlight
-                                    style={{padding:2,paddingRight:7,paddingLeft:7, borderWidth:1, borderColor:'grey', borderRadius:100}}
-                                >
-                                    <View>
-                                        <Icon name='ios-menu-outline' style={{color:'grey'}}/>
-                                    </View>
-                                </TouchableHighlight>
-                            </View>
-                            <Hr lineColor='#ecf0f1' width="100"/>
+                <Content style={{backgroundColor:'white'}}>
+                    <View style={{padding:15, flexDirection:'row', alignItems:'flex-start', marginTop:10, borderBottomWidth:.5, borderColor:'#bdc3c7'}}>
+                        <View style={{alignItems:'center'}}>
+                            <Image
+                                style={{width:115, height:80, resizeMode:'cover'}}
+                                source={require('../../images/sisthscreen.png')} />
                         </View>
-                        <View style={{marginTop:25}}>
-                            <TouchableHighlight
-                                style={{backgroundColor:'#16c1d5', borderRadius:10, padding:15, alignItems:'center'}}
-                            >
-                                <Text style={{fontFamily: 'Avenir Next', color:'white', fontSize:16, fontWeight:'500'}}>Adicionar local</Text>
-                            </TouchableHighlight>
+                        <View style={{marginLeft:12, width:AppSettings.formatWidth(60), justifyContent:'center'}}>
+                            <Text style={{color:'#c6729e', fontFamily:'AvenirNext-Medium'}}>Community Mentoring</Text>
+                            <Text style={{color:'#34495e', fontFamily:'AvenirNext-Medium', fontSize:11}}>
+                                Awana is a high energy club that meets most Wednesdays night from 6:30pm
+                                - 8.10pm beginning September 14, 2016 through April 26, 2017
+                            </Text>
                         </View>
                     </View>
                 </Content>
@@ -127,304 +82,149 @@ export default class PlaygroundComponent extends Component {
         );
     }
     renderThirdPage(){
-        let {height, width} = Dimensions.get('window');
         return (
-            <Container style={styles.container}>
-                <Header style={{backgroundColor:'#1dc1d5'}}>
+            <Container >
+                <Header style={{backgroundColor:'#232642'}}>
                     <Button
                         onPress = {() => {
-                            store.dispatch({
-                                type : 'OPEN_DRAWER'
-                            })
+                            requestAnimationFrame(() => {
+                                store.dispatch({
+                                    type : 'OPEN_DRAWER'
+                                })
+                            });
                         }}
                         transparent>
-                        <Icon name='ios-menu-outline' style={{color:'white'}}/>
+                        <Icon name='ios-arrow-round-back' style={{color:'#4cb2cb'}}/>
                     </Button>
-                    <Title style={[styles.colorWhite, styles.fontAvenir]}>MINHA VIAGEM</Title>
+                    <Title style={{color:'white', fontFamily:'Avenir Next'}}>EVENTS</Title>
+                    <Button
+                        onPress = {() => {
+                            requestAnimationFrame(() => {
+                                store.dispatch({
+                                    type : 'OPEN_DRAWER'
+                                })
+                            });
+                        }}
+                        transparent>
+                        <Icon name='ios-search-outline' style={{color:'#4cb2cb'}}/>
+                    </Button>
                 </Header>
-                <Content>
+                <Content style={{backgroundColor:'white'}}>
+                    <Image
+                        style={{width:AppSettings.formatWidth(100), height:AppSettings.formatWidth(45), resizeMode:'cover'}}
+                        source={require('../../images/sisthscreen.png')}>
+                        <View style={{
+                            width:AppSettings.formatWidth(100),
+                            alignItems:'center',
+                            justifyContent:'center',
+                            height:AppSettings.formatWidth(45)}}>
+                            <Text style={{color:'white', backgroundColor:'transparent', fontFamily:'AvenirNext-Medium', fontWeight:'bold', fontSize:16}}>COMMUNITY MENTORING</Text>
+                            <Text style={{color:'white', backgroundColor:'transparent', fontFamily:'AvenirNext-Medium'}}>OCTOBER 24, 2016</Text>
+                        </View>
+                    </Image>
+                    <View
+                        style={{padding:26}}
+                    >
+                        <View style = {{borderBottomWidth:.5, borderColor:'#bdc3c7', paddingBottom:15}}>
+                            <View
+                                style={{flexDirection:'row', justifyContent:'space-between'}}
+                            >
+                                <View style={{width:AppSettings.formatWidth(80)}}>
+                                    <Text style={{color:'#d36799', backgroundColor:'transparent', fontFamily:'AvenirNext-Medium', fontWeight:"600"}}>
+                                        Commumity Mentoring Outreact Program. Don't miss it, bring friends
+                                    </Text>
+                                </View>
+                                <Icon name="ios-calendar-outline" style={{color:'#3498db', fontSize:30}}/>
+                            </View>
+                            <View style={{marginTop:10}}>
+                                <Text style={{color:'#7f8c8d', backgroundColor:'transparent', fontFamily:'AvenirNext-Medium'}}>
+                                    3:30 PM - 5:30 PM
+                                </Text>
+                            </View>
+                        </View>
+                        <View style = {{paddingTop:15}}>
+                            <Text style={{color:'#34495e', backgroundColor:'transparent', fontFamily:'AvenirNext-Medium', fontSize:14}}>
+                                Join us this Sunday as we encounter Christ in a fresh way!. For us, church
+                                is like home - filled  with laughter, fun and the  family of God.
+                                We love meting new people and in a church  like ours, there are many
+                                wonderful people to get to know!. We would like to extend our invitation to you
+                                to join us  at out of our services!.
+                            </Text>
+                        </View>
+                    </View>
                     <View>
-                        <View style={{height:height*0.3, width:width}}>
-                            <Image
-                                style={{height:height*0.3, width:width}}
-                                source={require('../../images/placeholder.png')}>
-                                <View style={{alignItems:'flex-start', justifyContent:'center', padding:20, marginTop:20}}>
-                                    <Image
-                                        style={{height:70, width:70, borderWidth:3, borderColor:'white', marginTop:12, borderRadius:5}}
-                                        source={require('../../images/map.png')} />
-                                    <Text style={{fontFamily: 'Avenir Next', color:'white', fontSize:22, fontWeight:'bold', marginTop:5}}>GUNUNG MULU</Text>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'white', fontSize:16, fontWeight:'300'}}>TREKKING</Text>
-                                </View>
-                            </Image>
-                        </View>
-                        <View style={{height:height*0.3, width:width}}>
-                            <Image
-                                style={{height:height*0.3, width:width}}
-                                source={require('../../images/placeholder.png')}>
-                                <View style={{alignItems:'flex-start', justifyContent:'center', padding:20, marginTop:20}}>
-                                    <Image
-                                        style={{height:70, width:70, borderWidth:3, borderColor:'white', marginTop:12, borderRadius:5}}
-                                        source={require('../../images/map.png')} />
-                                    <Text style={{fontFamily: 'Avenir Next', color:'white', fontSize:22, fontWeight:'bold', marginTop:5}}>GUNUNG MULU</Text>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'white', fontSize:16, fontWeight:'300'}}>TREKKING</Text>
-                                </View>
-                            </Image>
-                        </View>
-                        <View style={{height:height*0.3, width:width}}>
-                            <Image
-                                style={{height:height*0.3, width:width}}
-                                source={require('../../images/placeholder.png')}>
-                            </Image>
-                        </View>
+                        <Image source={require('../../images/map.png')} />
                     </View>
                 </Content>
             </Container>
         );
     }
-    renderFourthScreen(){
-        let {height, width} = Dimensions.get('window');
+    renderFourthPage(){
         return (
-            <Container style={styles.container}>
-                <Header style={{backgroundColor:'#1dc1d5'}}>
+            <Container >
+                <Header style={{backgroundColor:'#232642'}}>
                     <Button
                         onPress = {() => {
-                            store.dispatch({
-                                type : 'OPEN_DRAWER'
-                            })
+                            requestAnimationFrame(() => {
+                                store.dispatch({
+                                    type : 'OPEN_DRAWER'
+                                })
+                            });
                         }}
                         transparent>
-                        <Icon name='ios-menu-outline' style={{color:'white'}}/>
+                        <Icon name='ios-arrow-round-back' style={{color:'#4cb2cb'}}/>
                     </Button>
-                    <Title style={[styles.colorWhite, styles.fontAvenir]}>MINHA VIAGEM</Title>
-                </Header>
-                <Content>
-                    <View style={{padding:20, marginTop:20}}>
-                        <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10}}>
-                            <View style={{ alignItems:'flex-start', padding:10, flexDirection:'row', justifyContent:'space-around'}}>
-                                <View style={{flexDirection:'row'}}>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
-                                    <TextInput placeholder="Nome de Roterio" style={{height:30, width:width*0.8}}/>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{flexDirection:'row',marginTop:10}}>
-                            <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10, marginTop:10}}>
-                                <View style={{ alignItems:'flex-start', padding:10, flexDirection:'row', justifyContent:'space-around'}}>
-                                    <View style={{flexDirection:'row'}}>
-                                        <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
-                                        <TextInput placeholder="Data partida" style={{height:30, width:width*0.33}}/>
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10, marginTop:10, marginLeft:10}}>
-                                <View style={{ alignItems:'flex-start', padding:10, flexDirection:'row', justifyContent:'space-around'}}>
-                                    <View style={{flexDirection:'row'}}>
-                                        <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
-                                        <TextInput placeholder="Data Roterio" style={{height:30, width:width*0.33}}/>
-                                    </View>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10, marginTop:15}}>
-                            <View style={{ alignItems:'flex-start', padding:10, flexDirection:'row', justifyContent:'space-around'}}>
-                                <View style={{flexDirection:'row'}}>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
-                                    <TextInput placeholder="Nome de Roterio" style={{height:30, width:width*0.8}}/>
-                                </View>
-                                <Icon name='ios-menu-outline' style={{color:'grey'}}/>
-                            </View>
-                        </View>
-                        <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10, marginTop:15}}>
-                            <View style={{ alignItems:'flex-start', padding:10, flexDirection:'row', justifyContent:'space-around'}}>
-                                <View style={{flexDirection:'row'}}>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
-                                    <TextInput placeholder="Tipo de Roterio" style={{height:30, width:width*0.4}}/>
-                                </View>
-                                <View style={{flexDirection:'row', padding:8}}>
-                                    <Icon name='ios-menu-outline' style={{color:'#16c1d5', fontSize:16}}/>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'grey'}}> Publico</Text>
-                                </View>
-                                <View style={{flexDirection:'row', marginLeft:10, padding:8}}>
-                                    <Icon name='ios-menu-outline' style={{color:'grey', fontSize:16}}/>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'grey'}}> Privado</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{marginTop:15}}>
-                            <TouchableHighlight
-                                style={{height:height*0.25, borderRadius:10, backgroundColor : '#16c1d5', justifyContent:'center', alignItems:'center'}}
-                            >
-                                <View style={{alignItems:'center'}}>
-                                    <Icon name='ios-menu-outline' style={{color:'white', fontSize:60}}/>
-                                    <View style={{alignItems:'center', width:width*0.5}}>
-                                        <Text style={{fontFamily: 'Avenir Next', color:'white', fontSize:14, fontWeight:'500'}}>Adicione uma imagem para o seu roterio</Text>
-                                    </View>
-                                </View>
-                            </TouchableHighlight>
-                        </View>
-
-                        <View style={{marginTop:25}}>
-                            <TouchableHighlight
-                                style={{backgroundColor:'#16c1d5', borderRadius:10, padding:15, alignItems:'center'}}
-                            >
-                                <Text style={{fontFamily: 'Avenir Next', color:'white', fontSize:16, fontWeight:'500'}}>Adicionar local</Text>
-                            </TouchableHighlight>
-                        </View>
-                    </View>
-                </Content>
-            </Container>
-        );
-    }
-    renderFifthScreen(){
-        let {height, width} = Dimensions.get('window');
-        return (
-            <Container style={styles.container}>
-                <Header style={{backgroundColor:'#1dc1d5'}}>
+                    <Title style={{color:'white', fontFamily:'Avenir Next'}}>EVENTS</Title>
                     <Button
                         onPress = {() => {
-                            store.dispatch({
-                                type : 'OPEN_DRAWER'
-                            })
+                            requestAnimationFrame(() => {
+                                store.dispatch({
+                                    type : 'OPEN_DRAWER'
+                                })
+                            });
                         }}
                         transparent>
-                        <Icon name='ios-menu-outline' style={{color:'white'}}/>
+                        <Icon name='ios-search-outline' style={{color:'#4cb2cb'}}/>
                     </Button>
-                    <Title style={[styles.colorWhite, styles.fontAvenir]}>PROCURA ROTEIRO</Title>
                 </Header>
-                <Content>
-                    <View style={{padding:20, marginTop:10}}>
-                        <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10, marginTop:15}}>
-                            <View style={{ alignItems:'flex-start', padding:10, paddingLeft:20, paddingRight:20, flexDirection:'row', justifyContent:'space-around'}}>
-                                <View style={{flexDirection:'row'}}>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
-                                    <TextInput placeholder="Nome de Roterio" style={{height:30, width:width*0.8}}/>
-                                </View>
-                                <Icon name='ios-menu-outline' style={{color:'grey'}}/>
+                <Content style={{backgroundColor:'#292f4f'}}>
+                    <View style={{padding:30}}>
+                        <View style={{borderBottomWidth:.5, borderColor:'#67698b', paddingTop:AppSettings.formatHeight(2),  paddingBottom:AppSettings.formatHeight(5)}}>
+                            <Text style={{fontFamily:'Avenir Next', color:'#67698b', fontSize:14}}>N O T I F I C A T I O N</Text>
+                            <View style={{flexDirection:'row', paddingTop:AppSettings.formatHeight(4)}}>
+                                <Text style={{fontFamily:'AvenirNext-Medium', color:'#d3d4da', fontSize:16}}>All Primary Email</Text>
+                            </View>
+                            <View style={{flexDirection:'row', paddingTop:AppSettings.formatHeight(4)}}>
+                                <Text style={{fontFamily:'AvenirNext-Medium', color:'#d3d4da', fontSize:16}}>Primary Only</Text>
+                            </View>
+                            <View style={{flexDirection:'row', paddingTop:AppSettings.formatHeight(4)}}>
+                                <Text style={{fontFamily:'AvenirNext-Medium', color:'#d3d4da', fontSize:16}}>None</Text>
                             </View>
                         </View>
-                        <View style={{backgroundColor:'#f5f5f5', height:50, borderRadius:10, marginTop:15, marginBottom:10}}>
-                            <View style={{ alignItems:'flex-start', padding:10, paddingLeft:20, paddingRight:20, flexDirection:'row', justifyContent:'space-around'}}>
-                                <View style={{flexDirection:'row'}}>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
-                                    <TextInput placeholder="Nome de Roterio" style={{height:30, width:width*0.8}}/>
-                                </View>
-                                <Icon name='ios-menu-outline' style={{color:'grey'}}/>
+                        <View style={{borderBottomWidth:.5, borderColor:'#67698b', paddingTop:AppSettings.formatHeight(4),  paddingBottom:AppSettings.formatHeight(5)}}>
+                            <Text style={{fontFamily:'Avenir Next', color:'#67698b', fontSize:14}}>S I G N A T U R E</Text>
+                            <View style={{flexDirection:'row', paddingTop:AppSettings.formatHeight(4)}}>
+                                <Text style={{fontFamily:'AvenirNext-Medium', color:'#d3d4da', fontSize:16}}>Mobile Signature</Text>
                             </View>
                         </View>
-                        <TouchableHighlight
-                            underlayColor="#f5f5f5"
-                            onPress = {()=>{}}
-                        >
-                            <View style={{paddingTop:10, paddingBottom:10}}>
-                                <View style={{marginBottom:10, padding:5}}>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
+                        <View style={{borderBottomWidth:.5, borderColor:'#67698b', paddingTop:AppSettings.formatHeight(4),  paddingBottom:AppSettings.formatHeight(5)}}>
+                            <Text style={{fontFamily:'Avenir Next', color:'#67698b', fontSize:14}}>L A B E L S</Text>
+                            <View style={{flexDirection:'row', justifyContent:'space-between', paddingTop:AppSettings.formatHeight(4)}}>
+                                <Text style={{fontFamily:'AvenirNext-Medium', color:'#d3d4da', fontSize:16}}>Label Settings and notifications</Text>
+                                <View style={{justifyContent:'center', marginTop:-AppSettings.formatHeight(1)}}>
+                                    <Icon name="ios-arrow-forward-outline" style={{color:'white'}} />
                                 </View>
-                                <Hr lineColor='#ecf0f5' width="100"/>
                             </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            underlayColor="#f5f5f5"
-                            onPress = {()=>{}}
-                        >
-                            <View style={{paddingTop:10, paddingBottom:10}}>
-                                <View style={{marginBottom:10, padding:5}}>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
-                                </View>
-                                <Hr lineColor='#ecf0f5' width="100"/>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            underlayColor="#f5f5f5"
-                            onPress = {()=>{}}
-                        >
-                            <View style={{paddingTop:10, paddingBottom:10}}>
-                                <View style={{marginBottom:10, padding:5}}>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
-                                </View>
-                                <Hr lineColor='#ecf0f5' width="100"/>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            underlayColor="#f5f5f5"
-                            onPress = {()=>{}}
-                        >
-                            <View style={{paddingTop:10, paddingBottom:10}}>
-                                <View style={{marginBottom:10, padding:5}}>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
-                                </View>
-                                <Hr lineColor='#ecf0f5' width="100"/>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            underlayColor="#f5f5f5"
-                            onPress = {()=>{}}
-                        >
-                            <View style={{paddingTop:10, paddingBottom:10}}>
-                                <View style={{marginBottom:10, padding:5}}>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
-                                </View>
-                                <Hr lineColor='#ecf0f5' width="100"/>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            underlayColor="#f5f5f5"
-                            onPress = {()=>{}}
-                        >
-                            <View style={{paddingTop:10, paddingBottom:10}}>
-                                <View style={{marginBottom:10, padding:5}}>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
-                                </View>
-                                <Hr lineColor='#ecf0f5' width="100"/>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight
-                            underlayColor="#f5f5f5"
-                            onPress = {()=>{}}
-                        >
-                            <View style={{paddingTop:10, paddingBottom:10}}>
-                                <View style={{marginBottom:10, padding:5}}>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'#c1c1c1', fontSize:20}}>Praia Castelhanos - iiha Bel</Text>
-                                </View>
-                                <Hr lineColor='#ecf0f5' width="100"/>
-                            </View>
-                        </TouchableHighlight>
+                        </View>
                     </View>
                 </Content>
             </Container>
         );
     }
     render() {
-        return this.renderFirstPage();
+        return this.renderThirdPage();
     }
 }
 const styles = StyleSheet.create({
-    container:{
 
-    },
-    colorWhite : {
-      color: 'white',
-    },
-    map: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0
-    },
-    fontAvenir : {
-        fontFamily: 'AvenirNext-Medium'
-    },
-    header : {
-        backgroundColor : '#00638c'
-    },
-    footer : {
-        backgroundColor:'#f39c12'
-    },
-    content : {
-        backgroundColor:'#EBF4FA',
-        flex : 1
-    },
-    wrapper:{
-        height:400
-    }
 });

@@ -7,17 +7,23 @@
 import React, { Component } from 'react';
 import {AppRegistry, Text, StyleSheet} from 'react-native';
 import { Scene, Router, TabBar, Modal, Schema, Actions, Reducer, ActionConst } from 'react-native-router-flux'
-
+import codePush from "react-native-code-push";
 import Drawer from 'react-native-drawer';
 import store from './store/store';
 import HeaderComponent from './components/header';
 import PlaygroundComponent from './routes/newdesign/playground';
+import ArticlesComponent from './routes/dcc/articles';
+import SettingsComponent from './routes/dcc/settings';
+import ArticleDetailsCompoenent from './routes/dcc/article_details';
+import VideoComponent from './routes/dcc/video';
+import EventsComponent from './routes/dcc/events';
+import OfficeComponent from './routes/dcc/office';
+import LiveStreamComponent from './routes/dcc/livestream';
+import DomeComponent from './routes/dcc/dome';
+import AudioComponent from './routes/dcc/audio';
 
-import FirstScreenComponent from './routes/dummy/first_screen';
-import SecondScreenComponent from './routes/dummy/second_screen';
-import ThirdScreenComponent from './routes/dummy/third_screen';
-import FourthScreenComponent from './routes/dummy/fourth_screen';
-import FifthScreenComponent from './routes/dummy/fifth_screen';
+
+
 class TabIcon extends Component {
     render(){
         return (
@@ -45,10 +51,6 @@ export default class Keisha extends Component {
         })
     }
     render() {
-        const drawerStyles = {
-            drawer: { shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3},
-            main: {paddingLeft: 3}
-        };
         return (
             <Drawer
                 ref={(ref) => this._drawer = ref}
@@ -59,30 +61,26 @@ export default class Keisha extends Component {
                 content={<HeaderComponent />}
             >
                 <Router>
-                    <Scene key="first_screen" component={FirstScreenComponent} hideNavBar={true} />
-                    <Scene key="second_screen" component={SecondScreenComponent} hideNavBar={true} />
-                    <Scene key="third_screen" component={ThirdScreenComponent} hideNavBar={true} />
-                    <Scene key="fourth_screen" component={FourthScreenComponent} hideNavBar={true} />
-                    <Scene key="fifth_screen" component={FifthScreenComponent} hideNavBar={true} />
+                    <Scene key="articles" component={ArticlesComponent} hideNavBar={true} />
+                    <Scene key="audio" component={AudioComponent} hideNavBar={true} />
+                    <Scene key="settings" component={SettingsComponent} hideNavBar={true} />
+                    <Scene key="article_details" component={ArticleDetailsCompoenent} hideNavBar={true} />
+                    <Scene key="video" component={VideoComponent} hideNavBar={true} />
+                    <Scene key="events" component={EventsComponent} hideNavBar={true} />
+                    <Scene key="live_stream" component={LiveStreamComponent} hideNavBar={true} />
+                    <Scene key="office" component={OfficeComponent} hideNavBar={true} />
+                    <Scene key="dome" component={DomeComponent} hideNavBar={true} />
+                    <Scene key="playground" component={PlaygroundComponent} hideNavBar={true} />
                 </Router>
             </Drawer>
         )
     }
 }
+Keisha = codePush({
+    updateDialog: true,
+    installMode: codePush.InstallMode.IMMEDIATE,
+    checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+    deploymentKey : '2aH6i-5CtmxQfzkcArLU2DVrDfa-NJS-h1V4M' // Staging Key
+})(Keisha);
 
-let styles = StyleSheet.create({
-    tabBarStyle: {
-        backgroundColor: 'white',
-    },
-    navigationBarStyle  : {
-        backgroundColor:'transparent',
-        borderColor:'transparent'
-    },
-    titleStyle : {
-        color : 'white'
-    },
-    iconStyle : {
-        color:'red'
-    }
-});
 AppRegistry.registerComponent('Keisha', () => Keisha);

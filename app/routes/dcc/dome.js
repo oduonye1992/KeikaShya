@@ -1,0 +1,243 @@
+import React, { Component } from 'react';
+import { Text, StyleSheet,RefreshControl,  TextInput, ListView, Dimensions,View, Image, ScrollView, TouchableHighlight, AsyncStorage } from 'react-native';
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon } from 'native-base';
+import {Actions} from 'react-native-router-flux';
+import store from '../../store/store';
+import MapView from 'react-native-maps';
+import AppSettings from '../../config/settings';
+import EmptyStateComponent from './empty';
+import { Bubbles} from 'react-native-loader';
+
+export default class DomeComponent extends Component {
+    ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    constructor (props){
+        super(props);
+        this.state = {
+            pageState : 'loading', // loading, error, empty, data
+            dataSource: this.ds.cloneWithRows([]),
+            isRefreshing : false
+        };
+    }
+    convert_html_to_string(html){
+        let a = html;
+        let b = a.replace('<p>', '').replace('&#8220;', '');
+        let c = b.replace(/<\s*br[^>]?>/,'\n')
+            .replace(/(<([^>]+)>)/g, "");
+        return _.escape(c);
+    }
+    conf = {
+        storageKey : 'DCC/Articles'
+    };
+    componentDidMount(){
+        this.fetchLocal();
+    }
+    renderList(){
+        return <ListView
+            initialListSize = {1}
+            scrollRenderAheadDistance = {1}
+            removeClippedSubviews = {true}
+            enableEmptySections = {true}
+            dataSource={this.state.dataSource}
+            renderRow={
+                (rowData) => {
+                    return (
+                    <TouchableHighlight
+                        underlayColor ="#ecf0f1"
+                        onPress={() => {
+                            requestAnimationFrame(() => {
+                                Actions.article_details({article : rowData});
+                            });
+                        }}
+                    >
+                        <View style={{padding:15, flexDirection:'row', alignItems:'flex-start', marginTop:10, borderBottomWidth:.5, borderColor:'#bdc3c7'}}>
+                            <View style={{alignItems:'center'}}>
+                                <Image
+                                    style={{width:115, height:80, resizeMode:'cover', borderRadius:3}}
+                                    source={{uri : rowData.thumbnail}}/>
+                            </View>
+                            <View style={{marginLeft:12, width:AppSettings.formatWidth(60), justifyContent:'center'}}>
+                                <Text style={{color:'#c6729e', fontFamily:'AvenirNext-Medium'}}>{rowData.title}</Text>
+                                <Text style={{color:'#34495e', fontFamily:'AvenirNext-Medium', fontSize:11}}>
+                                    {this.convert_html_to_string(rowData.excerpt).substr(0, 140)+'...'}
+                                </Text>
+                            </View>
+                        </View>
+                    </TouchableHighlight>
+                    );
+                }
+            }
+        />
+    }
+    async fetchLocal(){
+        let value = await AsyncStorage.getItem(this.conf.storageKey);
+        if (value !== null) {
+            // We have data!!
+            this.setState({
+                dataSource: this.ds.cloneWithRows(JSON.parse(value).posts),
+                pageState : 'data'
+            });
+            this.fetchRemote('update');
+        } else {
+            this.fetchRemote();
+        }
+    }
+    async storeLocal(item){
+        await AsyncStorage.setItem(this.conf.storageKey, typeof item == 'string' ? item : JSON.stringify(item));
+    }
+    _onRefresh(){
+        this.setState({
+            isRefreshing : true
+        });
+        this.fetchRemote('update');
+    }
+    fetchRemote(_mode){
+        let mode = _mode || 'insert';
+        const url = 'http://davidschristiancentre.org/api/?json=get_recent_posts&date_format=U&count=2&exclude=comments,categories,custom_fields/';
+        fetch(url)
+            .then(res => res.json())
+            .then(response => {
+                if (response.length < 1){
+                    return this.setState({
+                        pageState : 'empty'
+                    });
+                }
+                this.setState({
+                    dataSource: this.ds.cloneWithRows(response.posts),
+                    pageState : 'data',
+                    isRefreshing : false
+                });
+                this.storeLocal(response);
+            })
+            .catch(err => {
+                alert(err);
+                if (mode == 'insert'){
+                    this.setState({
+                        pageState : 'error',
+                        isRefreshing : false
+                    });
+                }
+                // Show alert
+            })
+    }
+    renderMode(){
+        if (this.state.pageState == 'loading'){
+            return (
+                <View style={{height:AppSettings.formatHeight(80),
+                    alignItems:'center', justifyContent:'center'}}>
+                    <Bubbles size={10} color="#232642" />
+                </View>
+            );
+        } else if (this.state.pageState == 'error'){
+            return (
+                <EmptyStateComponent
+                    title = "An error has occured"
+                    description = "Please try again later"
+                    icon  = "ios-sad-outline"
+                    showButton = {false}
+                />
+            );
+        } else if (this.state.pageState == 'empty'){
+            return (
+                <EmptyStateComponent
+                    title = "No Articles are available now"
+                    description = "You will be notified when a new article pops up"
+                    icon  = "ios-book-outline"
+                    showButton = {false}
+                />
+            );
+        } else if (this.state.pageState == 'data'){
+            return this.renderList();
+        } else {
+            return null;
+        }
+    }
+    render() {
+        return (
+            <Container >
+                <Header style={{backgroundColor:'#232642'}}>
+                    <Button
+                        onPress = {() => {
+                            requestAnimationFrame(() => {
+                                store.dispatch({
+                                    type : 'OPEN_DRAWER'
+                                })
+                            });
+                        }}
+                        transparent>
+                        <Icon name='ios-menu' style={{color:'#4cb2cb'}}/>
+                    </Button>
+                    <Title style={{color:'white', fontFamily:'AvenirNext-Medium'}}>DOME</Title>
+                </Header>
+                <Content>
+                    <Image
+                        style={{width:AppSettings.formatWidth(100), height:AppSettings.formatWidth(45), resizeMode:'cover'}}
+                        source={require('../../images/sisthscreen.png')}>
+                        <View style={{
+                            width:AppSettings.formatWidth(100),
+                            alignItems:'center',
+                            backgroundColor:'black',
+                            opacity : 0.7,
+                            justifyContent:'center',
+                            height:AppSettings.formatWidth(45)}}>
+                            <Text style={{color:'white', backgroundColor:'transparent', fontFamily:'AvenirNext-Medium', fontWeight:'bold', fontSize:16}}>DCC Lagos</Text>
+                            <Text style={{color:'white', backgroundColor:'transparent', fontFamily:'AvenirNext-Medium'}}>Victory Dome</Text>
+                        </View>
+                    </Image>
+                    <View
+                        style={{padding:AppSettings.formatWidth(8)}}
+                    >
+                        <View style = {{ flexDirection:'row', justifyContent:'space-between'}}>
+                            <View>
+                                <View>
+                                    <Text style={{color:'#2c3e50', backgroundColor:'transparent', fontFamily:'AvenirNext-Medium'}}>
+                                        DCC Lagos
+                                    </Text>
+                                    <Text style={{color:'#34495e', backgroundColor:'transparent', fontFamily:'AvenirNext-Medium'}}>
+                                        Victory Dome, behind
+                                    </Text>
+                                    <Text style={{color:'#34495e', backgroundColor:'transparent', fontFamily:'AvenirNext-Medium'}}>
+                                        PHCN Office,
+                                    </Text>
+                                    <Text style={{color:'#34495e', backgroundColor:'transparent', fontFamily:'AvenirNext-Medium'}}>
+                                        Fatgbems Bus Stop
+                                    </Text>
+                                    <Text style={{color:'#34495e', backgroundColor:'transparent', fontFamily:'AvenirNext-Medium'}}>
+                                        Amuwo Odofin
+                                    </Text>
+                                </View>
+                            </View>
+                            <View>
+                                <Text style={{color:'#d36799', backgroundColor:'transparent', fontFamily:'AvenirNext-Medium'}}>
+                                    Get Directions
+                                </Text>
+                                <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                                    <Icon name="ios-call" style={{color : '#d36799'}} />
+                                    <Icon name="ios-navigate-outline" style={{color : '#d36799'}} />
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                    <MapView
+                        style={ styles.map }
+                        initialRegion={{
+                            latitude: 6.4660582,
+                            longitude: 3.3156432,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.033,
+                        }}
+                    />
+                </Content>
+            </Container>
+        );
+    }
+}
+const styles = StyleSheet.create({
+    map: {
+        position: 'absolute',
+        height:AppSettings.formatHeight(42),
+        top: AppSettings.formatHeight(49),
+        left: 0,
+        right: 0,
+        bottom: 0,
+    }
+});

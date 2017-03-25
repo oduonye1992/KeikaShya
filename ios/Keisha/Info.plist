@@ -40,6 +40,8 @@
     <string/>
     <key>NSAppTransportSecurity</key>
     <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
       <key>NSExceptionDomains</key>
       <dict>
         <key>localhost</key>
@@ -73,5 +75,7 @@
       <string>SimpleLineIcons.ttf</string>
       <string>Zocial.ttf</string>
     </array>
+    <key>CodePushDeploymentKey</key>
+    <string>2aH6i-5CtmxQfzkcArLU2DVrDfa-NJS-h1V4M</string>
   </dict>
 </plist>

@@ -11,7 +11,8 @@ export default class FourthScreenComponent extends Component {
         super(props);
         this.state = {
             isLoading : true,
-            pageArray : []
+            pageArray : [],
+            active : true
         };
     }
     renderFourthScreen(){
@@ -73,14 +74,36 @@ export default class FourthScreenComponent extends Component {
                                     <Text style={{fontFamily: 'Avenir Next', color:'#16c1d5', fontSize:25, fontWeight:'bold', marginRight:10,marginTop:-5}}>|</Text>
                                     <TextInput placeholder="Tipo de Roterio" style={{height:30, width:width*0.4}}/>
                                 </View>
-                                <View style={{flexDirection:'row', padding:8}}>
-                                    <Icon name='ios-radio-button-on-outline' style={{color:'#16c1d5', fontSize:16}}/>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'grey'}}> Publico</Text>
-                                </View>
-                                <View style={{flexDirection:'row', marginLeft:10, padding:8}}>
-                                    <Icon name='ios-radio-button-on-outline' style={{color:'grey', fontSize:16}}/>
-                                    <Text style={{fontFamily: 'Avenir Next', color:'grey'}}> Privado</Text>
-                                </View>
+                                <TouchableHighlight
+                                    underlayColor="#f5f5f5"
+                                    onPress = {() => {
+                                        requestAnimationFrame(() => {
+                                            this.setState({
+                                                active : true
+                                            })
+                                        });
+                                    }}
+                                >
+                                    <View style={{flexDirection:'row', padding:8}}>
+                                        <Icon name='ios-radio-button-on-outline' style={{color:this.state.active ? '#16c1d5' : 'grey', fontSize:16}}/>
+                                        <Text style={{fontFamily: 'Avenir Next', color:'grey'}}> Publico</Text>
+                                    </View>
+                                </TouchableHighlight>
+                                <TouchableHighlight
+                                    underlayColor="#f5f5f5"
+                                    onPress = {() => {
+                                        requestAnimationFrame(() => {
+                                            this.setState({
+                                                active : false
+                                            })
+                                        });
+                                    }}
+                                >
+                                    <View style={{flexDirection:'row', marginLeft:10, padding:8}}>
+                                        <Icon name='ios-radio-button-on-outline' style={{color:this.state.active ? 'grey' : '#16c1d5', fontSize:16}}/>
+                                        <Text style={{fontFamily: 'Avenir Next', color:'grey'}}> Privado</Text>
+                                    </View>
+                                </TouchableHighlight>
                             </View>
                         </View>
                         <View style={{marginTop:15}}>

@@ -12,17 +12,21 @@ export default class ListWithIconComponent extends Component{
     render(){
         return (
             <TouchableHighlight
-                underlayColor="#f5f5f5"
+                underlayColor="black"
                 onPress={() => {
                     requestAnimationFrame(() => {
                         this.onClick()
                     });
                 }}
             >
-                <View style={{padding : 10}}>
-                    <View style={{flexDirection:'row', justifyContent:'flex-start', paddingBottom:20}}>
-                        <Icon name={this.props.icon} style={[{color:'#34495e'}]}/>
-                        <Text style={{padding:6, marginLeft : 10, fontWeight:'bold', fontFamily: 'Avenir Next', color : '#34495e'}}>{this.props.title}</Text>
+                <View style={{padding : 10, paddingTop:10}}>
+                    <View style={{flexDirection:'row', justifyContent:'flex-start', paddingBottom:10}}>
+                        <View style={{width:30, justifyContent:'center'}}>
+                            <Icon name={this.props.icon} style={[{color:'#4bb1ca', fontSize:23}]}/>
+                        </View>
+                        <View style={{justifyContent:'center'}}>
+                            <Text style={{marginLeft : 10, fontSize:16, fontFamily: 'AvenirNext-Medium', color : '#d7d7dc'}}>{this.props.title}</Text>
+                        </View>
                     </View>
                 </View>
             </TouchableHighlight>
